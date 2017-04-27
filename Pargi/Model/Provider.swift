@@ -31,6 +31,12 @@ struct Provider {
     }
 }
 
+extension Provider: CustomStringConvertible {
+    var description: String {
+        return "Provider(id: \(self.id), name: \(self.name), color: \(self.color), zones: \(self.zones.count))"
+    }
+}
+
 // MARK: Cereal
 
 extension Provider: CerealType {

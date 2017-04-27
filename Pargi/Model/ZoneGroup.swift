@@ -29,6 +29,12 @@ struct ZoneGroup {
     }
 }
 
+extension ZoneGroup: CustomStringConvertible {
+    var description: String {
+        return "ZoneGroup(id: \(self.id), reason: \(self.reason), name: \(self.name), zones: \(self.zones.count))"
+    }
+}
+
 // MARK: Cereal
 
 extension ZoneGroup: CerealType {

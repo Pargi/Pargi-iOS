@@ -29,6 +29,12 @@ struct Database {
     }
 }
 
+extension Database: CustomStringConvertible {
+    var description: String {
+        return "Database(version: \(self.version.rawValue), date: \(self.date), hash: \(self.hash), providers: \(self.providers.count), groups: \(self.groups.count))"
+    }
+}
+
 // Barebones semver implementation
 struct SemanticVersion: ExpressibleByStringLiteral {
     let rawValue: String
