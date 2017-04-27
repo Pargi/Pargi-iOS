@@ -19,6 +19,9 @@
 		8E3921561EB1E7D200277701 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921401EB1CADA00277701 /* Provider.swift */; };
 		8E3921571EB1E7D500277701 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921421EB1CC7900277701 /* Zone.swift */; };
 		8E3921581EB1E7D700277701 /* ZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921441EB1E3BA00277701 /* ZoneGroup.swift */; };
+		8E39215E1EB2033800277701 /* Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E39215A1EB2033800277701 /* Data.json */; };
+		8E39215F1EB2033800277701 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8E39215C1EB2033800277701 /* README.md */; };
+		8E3921601EB2033800277701 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8E39215D1EB2033800277701 /* README.md */; };
 		8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */; };
 		8ED7E8211EB1BCED00F13023 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E8201EB1BCED00F13023 /* ViewController.swift */; };
 		8ED7E8241EB1BCED00F13023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ED7E8221EB1BCED00F13023 /* Main.storyboard */; };
@@ -46,6 +49,9 @@
 		8E39214A1EB1E6FA00277701 /* PargiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PargiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E39214C1EB1E6FA00277701 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		8E39214E1EB1E6FA00277701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E39215A1EB2033800277701 /* Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Data.json; sourceTree = "<group>"; };
+		8E39215C1EB2033800277701 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8E39215D1EB2033800277701 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8ED7E81B1EB1BCED00F13023 /* Pargi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pargi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ED7E8201EB1BCED00F13023 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,12 +109,31 @@
 			path = PargiTests;
 			sourceTree = "<group>";
 		};
+		8E3921591EB2033800277701 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8E39215A1EB2033800277701 /* Data.json */,
+				8E39215B1EB2033800277701 /* docs */,
+				8E39215D1EB2033800277701 /* README.md */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8E39215B1EB2033800277701 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				8E39215C1EB2033800277701 /* README.md */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
 		8ED7E8121EB1BCED00F13023 = {
 			isa = PBXGroup;
 			children = (
 				8ED7E81D1EB1BCED00F13023 /* Pargi */,
 				8E39214B1EB1E6FA00277701 /* PargiTests */,
 				8ED7E81C1EB1BCED00F13023 /* Products */,
+				8E3921591EB2033800277701 /* Data */,
 				8E3921381EB1C13400277701 /* Cartfile */,
 				8E39213A1EB1C24500277701 /* Frameworks */,
 			);
@@ -230,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E39215E1EB2033800277701 /* Data.json in Resources */,
 				8ED7E8291EB1BCED00F13023 /* LaunchScreen.storyboard in Resources */,
 				8ED7E8261EB1BCED00F13023 /* Assets.xcassets in Resources */,
 				8E3921391EB1C13400277701 /* Cartfile in Resources */,
@@ -276,8 +302,10 @@
 				8E3921411EB1CADA00277701 /* Provider.swift in Sources */,
 				8E39213F1EB1C44200277701 /* Database.swift in Sources */,
 				8E3921431EB1CC7900277701 /* Zone.swift in Sources */,
+				8E39215F1EB2033800277701 /* README.md in Sources */,
 				8ED7E8211EB1BCED00F13023 /* ViewController.swift in Sources */,
 				8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */,
+				8E3921601EB2033800277701 /* README.md in Sources */,
 				8E3921451EB1E3BA00277701 /* ZoneGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
