@@ -97,7 +97,7 @@
 					8ED7E81A1EB1BCED00F13023 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = M95U3P5YY5;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -261,11 +261,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M95U3P5YY5;
 				INFOPLIST_FILE = Pargi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hnormak.Pargi;
+				PRODUCT_BUNDLE_IDENTIFIER = hnormak.pargi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca692231-9b31-4c84-982c-94d8362fa582";
+				PROVISIONING_PROFILE_SPECIFIER = "Pargi Development";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -274,11 +277,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = M95U3P5YY5;
 				INFOPLIST_FILE = Pargi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hnormak.Pargi;
+				PRODUCT_BUNDLE_IDENTIFIER = hnormak.pargi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Pargi App Store";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -302,6 +307,7 @@
 				8ED7E82F1EB1BCED00F13023 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
