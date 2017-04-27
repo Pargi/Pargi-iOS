@@ -27,6 +27,27 @@ class ModelTests: XCTestCase {
         }
     }
     
+    func testZoneCostEstimation() {
+        // Quick test of the cost estimation (this SHOULD be much more thorough)
+        let tariff = Zone.Tariff(days: .All, periods: [3600: 150.0, 86400: 600.0])
+        let zone = Zone(id: 1, code: "AAA", tariffs: [tariff], regions: [])
+        
+        // All tests end at the same time
+        let end = Date()
+        
+        // 30 minutes
+        let startThirty = end.addingTimeInterval(-30 * 60.0)
+        XCTAssertEqual(zone.estimatedPrice(from: startThirty, to: end).cost, 150.0)
+        
+        // 4h 30min
+        let startTwoSeventy = end.addingTimeInterval(-270 * 60.0)
+        XCTAssertEqual(zone.estimatedPrice(from: startTwoSeventy, to: end).cost, 600.0)
+        
+        // 2 days, 2h5min
+        let startOverThreeThou = end.addingTimeInterval(-3005 * 60.0)
+        XCTAssertEqual(zone.estimatedPrice(from: startOverThreeThou, to: end).cost, 1650.0)
+    }
+    
     // MARK: Provider
     
     func testProvider() {
