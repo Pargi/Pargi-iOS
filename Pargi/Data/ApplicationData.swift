@@ -17,7 +17,9 @@ struct ApplicationData {
     private static let DatabasePrimeResource = "Data"
     private static let DatabasePrimeResourceExtension = "json"
     
-    private enum Error: Swift.Error {
+    private static let DatabaseUpdateURL = URL(string: "https://raw.githubusercontent.com/Pargi/Data/master/Data.json")!
+    
+    enum Error: Swift.Error {
         case DatabaseError(String)
     }
     
@@ -25,7 +27,7 @@ struct ApplicationData {
         do {
             let fileURL = databaseFileURL()
             
-            if !FileManager.default.fileExists(atPath: fileURL.absoluteString) {
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
                 // Prime the DB
                 try primeDatabase()
             }
@@ -39,6 +41,32 @@ struct ApplicationData {
         }
     }()
     
+    static func updateDatabase() {
+        // Update database by downloading the latest, and writing it to disk
+        _ = Downloader(URL: DatabaseUpdateURL) { (error, fileURL) in
+            guard let fileURL = fileURL else {
+                print("Failed to get the latest DB from cloud - \(String(describing: error))")
+                return
+            }
+            
+            do {
+                let updatedDatabase = try createDatabase(withContentsAtURL: fileURL)
+                let currentDatabase = self.currentDatabase
+                
+                if updatedDatabase.version > currentDatabase.version {
+                    try overwriteDatabase(withContentsAtURL: fileURL)
+                    print("DB updated")
+                } else {
+                    print("Skipping update, fetched database either older or as new as local DB")
+                }
+            } catch let error {
+                print("Failed to update DB - \(error)")
+            }
+        }
+    }
+    
+    // MARK: Helpers
+    
     private static func databaseFileURL() -> URL {
         let documents = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         return documents.appendingPathComponent(ApplicationData.DatabaseFilename)
@@ -50,6 +78,10 @@ struct ApplicationData {
             return
         }
         
+        try overwriteDatabase(withContentsAtURL: fileURL)
+    }
+    
+    private static func createDatabase(withContentsAtURL fileURL: URL) throws -> Database {
         let data = try Data(contentsOf: fileURL)
         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw Error.DatabaseError("Failed to cast original JSON as a dictionary")
@@ -59,7 +91,12 @@ struct ApplicationData {
             throw Error.DatabaseError("Failed to initialise Database from JSON")
         }
         
+        return database
+    }
+    
+    private static func overwriteDatabase(withContentsAtURL fileURL: URL) throws {
+        let database = try createDatabase(withContentsAtURL: fileURL)
         let saveData = try CerealEncoder.data(withRoot: database)
-        try saveData.write(to: databaseFileURL())
+        try saveData.write(to: databaseFileURL(), options: .atomicWrite)
     }
 }
