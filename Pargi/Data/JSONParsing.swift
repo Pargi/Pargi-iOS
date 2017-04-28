@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Database {
     init?(dictionary: [String: Any]) {
@@ -65,7 +66,7 @@ fileprivate extension Provider {
         
         self.id = id
         self.name = name
-        self.color = color
+        self.color = UIColor(hex: color)
         
         self.beaconMajor = dictionary["beacon-major"] as? Int
         self.zones = zones[self.id] ?? []
