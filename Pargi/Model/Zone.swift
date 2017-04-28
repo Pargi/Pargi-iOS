@@ -259,6 +259,35 @@ extension Date {
     }
 }
 
+// MARK: Equatable
+
+extension Zone: Equatable {
+    static func ==(lhs: Zone, rhs: Zone) -> Bool {
+        return lhs.id == rhs.id && lhs.code == rhs.code && lhs.tariffs == rhs.tariffs &&
+            lhs.regions == rhs.regions && lhs.beaconMinor == rhs.beaconMinor
+    }
+}
+
+extension Zone.Tariff: Equatable {
+    static func ==(lhs: Zone.Tariff, rhs: Zone.Tariff) -> Bool {
+        return lhs.periodStart == rhs.periodStart && lhs.periodEnd == rhs.periodEnd &&
+            lhs.freePeriod == rhs.freePeriod && lhs.minPeriod == rhs.minPeriod &&
+            lhs.minAmount == rhs.minAmount && lhs.days == rhs.days && lhs.periods == rhs.periods
+    }
+}
+
+extension Zone.Region: Equatable {
+    static func ==(lhs: Zone.Region, rhs: Zone.Region) -> Bool {
+        return lhs.points == rhs.points && lhs.interiorRegions == rhs.interiorRegions
+    }
+}
+
+extension Zone.Region.Location: Equatable {
+    static func ==(lhs: Zone.Region.Location, rhs: Zone.Region.Location) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+
 // MARK: Cereal
 
 extension Zone.Tariff.Day: CerealType {
