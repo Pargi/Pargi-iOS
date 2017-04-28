@@ -13,6 +13,8 @@ import Pulley
 class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryContentControllerDelegate {
     @IBOutlet var mapView: MKMapView!
     
+    private let mapMaxAltitude: CLLocationDistance = 500.0
+    
     var zones: [Zone] = [] {
         didSet {
             // Cleanup old
@@ -28,12 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
             self.mapView.addAnnotations(points)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.mapView.setUserTrackingMode(.follow, animated: true)
-    }
-    
+        
     // MARK: MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated: Bool) {
@@ -42,6 +39,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
             pulley.setDrawerPosition(position: .collapsed)
         }
     }
+
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        // Update camera (if altitude is higher than expected)
+        let existingCamera = mapView.camera
+        let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
+        
+        let coordinate: CLLocationCoordinate2D
+        if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(userLocation.coordinate)) && existingCamera.altitude == altitude {
+            coordinate = existingCamera.centerCoordinate
+        } else {
+            coordinate = userLocation.coordinate
+        }
+        
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
+        mapView.setCamera(camera, animated: true)
+    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let annotation = overlay as? Annotation, let polygon = annotation.polygon else {
@@ -49,14 +62,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
         }
         
         let renderer = MKPolygonRenderer(polygon: polygon)
-        renderer.lineWidth = 3.0
+        renderer.lineWidth = 2.0
         
         if let provider = ApplicationData.currentDatabase.provider(for: annotation.zone) {
-            renderer.strokeColor = provider.color
-            renderer.fillColor = provider.color.withAlphaComponent(0.2)
+            renderer.strokeColor = provider.color.withAlphaComponent(0.6)
+            renderer.fillColor = provider.color.withAlphaComponent(0.15)
         } else {
-            renderer.strokeColor = self.view.tintColor
-            renderer.fillColor = self.view.tintColor.withAlphaComponent(0.2)
+            renderer.strokeColor = self.view.tintColor.withAlphaComponent(0.6)
+            renderer.fillColor = self.view.tintColor.withAlphaComponent(0.15)
         }
         
         return renderer
