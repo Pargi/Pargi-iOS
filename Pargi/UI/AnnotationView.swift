@@ -30,6 +30,9 @@ class AnnotationView: MKAnnotationView {
         didSet {
             self.frame.size = self.layoutBoundingRect().size
             self.centerOffset.y = self.bounds.midY - self.iconBoundingRect().midY
+            
+            self.setNeedsLayout()
+            self.setNeedsDisplay()
         }
     }
     
@@ -57,7 +60,7 @@ class AnnotationView: MKAnnotationView {
     }
     
     private func iconBoundingRect() -> CGRect {
-        return CGRect(origin: .zero, size: CGSize(width: 16.0, height: 16.0))
+        return CGRect(origin: .zero, size: CGSize(width: 17.0, height: 17.0))
     }
     
     private func layoutBoundingRect() -> CGRect {
@@ -77,7 +80,7 @@ class AnnotationView: MKAnnotationView {
         var iconRect = self.iconBoundingRect()
         
         // Adjust frames to properly lay items out
-        textRect = textRect.offsetBy(dx: (self.bounds.width - textRect.width) / 2.0 + 1.0, dy: self.bounds.height - textRect.height).insetBy(dx: 2.0, dy: 2.0)
+        textRect = textRect.offsetBy(dx: (self.bounds.width - textRect.width) / 2.0 + 1.0, dy: self.bounds.height - textRect.height - 1.0).insetBy(dx: 2.0, dy: 2.0)
         iconRect = iconRect.offsetBy(dx: (self.bounds.width - iconRect.width) / 2.0, dy: 2.0).insetBy(dx: 2.0, dy: 2.0)
         
         // Text attributes
@@ -92,7 +95,7 @@ class AnnotationView: MKAnnotationView {
         ]
         
         // Draw icon
-        ctx?.setLineWidth(2.0)
+        ctx?.setLineWidth(1.0)
         ctx?.setLineJoin(.round)
         ctx?.setLineCap(.round)
         ctx?.setFillColor(self.tintColor.cgColor)
@@ -108,6 +111,7 @@ class AnnotationView: MKAnnotationView {
         }
         
         // Draw outline first, then text
+        ctx?.setLineWidth(2.0)
         ctx?.setTextDrawingMode(.fillStroke)
         title.draw(in: textRect.offsetBy(dx: 0.0, dy: 0.3), withAttributes: attributes)
         
