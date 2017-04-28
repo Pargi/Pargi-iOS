@@ -1,26 +1,142 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xWZ-lI-EJl">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="0Wk-6p-rAK">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="xWZ-lI-EJl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CSt-kW-lSp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gDu-dQ-fh5" kind="relationship" relationship="rootViewController" id="I0D-Re-ew3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FfJ-To-9ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1273" y="-128"/>
+        </scene>
+        <!--Pargi-->
+        <scene sceneID="WFC-mx-4Wl">
+            <objects>
+                <viewController title="Pargi" id="gDu-dQ-fh5" customClass="MainViewController" customModule="Pargi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="DK4-7B-u9S"/>
+                        <viewControllerLayoutGuide type="bottom" id="ANZ-Wb-Y1O"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="gBW-4j-jIC">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="odr-6Q-jam">
+                                <rect key="frame" x="0.0" y="-64" width="375" height="389"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="Vs3-z2-MvH" kind="embed" id="oJ1-k4-Bzh"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-jG-JGB">
+                                <rect key="frame" x="0.0" y="323" width="375" height="280"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="h6D-91-X7R" kind="embed" id="JEP-MB-NLD"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pargi" id="rQj-WN-uWm">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="2dH-Tc-nN4"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="drawerContentContainerView" destination="XBL-jG-JGB" id="ApT-mv-9Vw"/>
+                        <outlet property="primaryContentContainerView" destination="odr-6Q-jam" id="lh0-w4-WXp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y82-Lu-QVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-148" y="-128.18590704647679"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="O8k-yG-k3w">
+            <objects>
+                <viewController id="Vs3-z2-MvH" customClass="MapViewController" customModule="Pargi" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6d0-bF-V5M"/>
+                        <viewControllerLayoutGuide type="bottom" id="xCQ-jQ-xXQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qZu-37-IzL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIJ-34-wPP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Vs3-z2-MvH" id="eXp-0h-xYh"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kIJ-34-wPP" firstAttribute="centerY" secondItem="qZu-37-IzL" secondAttribute="centerY" id="RTe-vc-0kv"/>
+                            <constraint firstItem="kIJ-34-wPP" firstAttribute="width" secondItem="qZu-37-IzL" secondAttribute="width" id="dRB-TA-B0c"/>
+                            <constraint firstItem="kIJ-34-wPP" firstAttribute="height" secondItem="qZu-37-IzL" secondAttribute="height" id="go8-uc-4Gf"/>
+                            <constraint firstItem="kIJ-34-wPP" firstAttribute="centerX" secondItem="qZu-37-IzL" secondAttribute="centerX" id="xp3-cK-A7I"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="kIJ-34-wPP" id="dji-Qq-B3g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hjk-Yi-P6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="637.60000000000002" y="-253.2233883058471"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="SKz-HF-azQ">
+            <objects>
+                <viewController id="h6D-91-X7R" customClass="DetailViewController" customModule="Pargi" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HfT-Jn-ifY"/>
+                        <viewControllerLayoutGuide type="bottom" id="nUV-62-cdI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gyJ-Qw-ze1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J28-bG-Y0U">
+                                <rect key="frame" x="165" y="8" width="44" height="8"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="ShX-79-54E"/>
+                                    <constraint firstAttribute="width" constant="44" id="h3t-Ca-8Ko"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J28-bG-Y0U" firstAttribute="top" secondItem="HfT-Jn-ifY" secondAttribute="bottom" constant="8" id="NGD-cv-sCI"/>
+                            <constraint firstItem="J28-bG-Y0U" firstAttribute="centerX" secondItem="gyJ-Qw-ze1" secondAttribute="centerX" id="drO-g2-HHK"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JrO-xj-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="638" y="165"/>
         </scene>
     </scenes>
 </document>

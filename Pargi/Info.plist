@@ -33,5 +33,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Pargi kasutab sinu asukohta parkla määramiseks</string>
 </dict>
 </plist>
