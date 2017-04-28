@@ -13,7 +13,7 @@
         <scene sceneID="0Wk-6p-rAK">
             <objects>
                 <navigationController id="xWZ-lI-EJl" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CSt-kW-lSp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CSt-kW-lSp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -114,15 +114,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J28-bG-Y0U">
-                                <rect key="frame" x="165" y="8" width="44" height="8"/>
+                                <rect key="frame" x="169" y="8" width="36" height="5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="8" id="ShX-79-54E"/>
-                                    <constraint firstAttribute="width" constant="44" id="h3t-Ca-8Ko"/>
+                                    <constraint firstAttribute="height" constant="5" id="ShX-79-54E"/>
+                                    <constraint firstAttribute="width" constant="36" id="h3t-Ca-8Ko"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
+                                        <integer key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
