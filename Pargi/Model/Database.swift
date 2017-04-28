@@ -27,6 +27,14 @@ struct Database {
             return self.providers.flatMap({ $0.zones }).sorted(by: { $0.code.compare($1.code, options: .numeric, range: nil, locale: nil) == .orderedAscending })
         }
     }
+    
+    func provider(for zone: Zone) -> Provider? {
+        return self.providers.first { (provider) -> Bool in
+            return provider.zones.contains(where: { (comp) -> Bool in
+                return comp == zone
+            })
+        }
+    }
 }
 
 extension Database: CustomStringConvertible {
