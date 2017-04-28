@@ -49,7 +49,7 @@ class AnnotationView: MKAnnotationView {
             let attributedTitle = NSAttributedString(string: title, attributes: [
                 NSFontAttributeName: self.titleTextFont(),
                 NSStrokeWidthAttributeName: -20.0,
-                NSKernAttributeName: self.contentScaleFactor * 0.3])
+                NSKernAttributeName: self.contentScaleFactor * 0.2])
             
             frame = CGRect(origin: .zero, size: attributedTitle.size())
             frame.size.height += 4.0
@@ -90,7 +90,7 @@ class AnnotationView: MKAnnotationView {
         var attributes: [String: Any] = [
             NSFontAttributeName: self.titleTextFont(),
             NSForegroundColorAttributeName: UIColor.white,
-            NSKernAttributeName: self.contentScaleFactor * 0.3,
+            NSKernAttributeName: self.contentScaleFactor * 0.2,
             NSParagraphStyleAttributeName: titleParagraphStyle
         ]
         
