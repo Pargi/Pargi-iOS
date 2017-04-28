@@ -30,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
             self.mapView.addAnnotations(points)
         }
     }
-        
+    
     // MARK: MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated: Bool) {
@@ -46,7 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
         let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
         
         let coordinate: CLLocationCoordinate2D
-        if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(userLocation.coordinate)) && existingCamera.altitude == altitude {
+        if mapView.isUserLocationVisible && existingCamera.altitude == altitude {
             coordinate = existingCamera.centerCoordinate
         } else {
             coordinate = userLocation.coordinate
