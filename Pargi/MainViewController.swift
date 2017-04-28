@@ -13,7 +13,7 @@ import Foundation
 import UIKit
 import Pulley
 
-class MainViewController: PulleyViewController {
+class MainViewController: PulleyViewController, MapViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,14 @@ class MainViewController: PulleyViewController {
         
         if let mapView = self.primaryContentViewController as? MapViewController {
             mapView.zones = zones
+            mapView.delegate = self
         }
+    }
+    
+    // MARK: MapViewControllerDelegate
+    
+    func mapViewController(_ controller: MapViewController, didUpdateVisibleZones zones: [Zone]) {
+        let top = zones[0..<min(zones.count, 5)]
+        print("Closest zones \(top.count) => \(top.map({ $0.code }))")
     }
 }
