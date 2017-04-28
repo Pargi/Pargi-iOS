@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import UIKit
 import Cereal
 
 struct Provider {
@@ -17,12 +18,12 @@ struct Provider {
     let zones: [Zone]
     
     // Hexadecimal color
-    let color: String
+    let color: UIColor
     
     // Unused
     let beaconMajor: Int?
     
-    init(id: Int, name: String, zones: [Zone], color: String, beaconMajor: Int? = nil) {
+    init(id: Int, name: String, zones: [Zone], color: UIColor, beaconMajor: Int? = nil) {
         self.id = id
         self.name = name
         self.color = color
@@ -55,13 +56,13 @@ extension Provider: CerealType {
         let beaconMajor: Int? = try decoder.decode(key: Keys.beaconMajor)
         let zones: [Zone] = try decoder.decodeCereal(key: Keys.zones)!
         
-        self.init(id: id, name: name, zones: zones, color: color, beaconMajor: beaconMajor)
+        self.init(id: id, name: name, zones: zones, color: UIColor(hex: color), beaconMajor: beaconMajor)
     }
     
     func encodeWithCereal(_ encoder: inout Cereal.CerealEncoder) throws {
         try encoder.encode(self.id, forKey: Keys.id)
         try encoder.encode(self.name, forKey: Keys.name)
-        try encoder.encode(self.color, forKey: Keys.color)
+        try encoder.encode(self.color.hexString, forKey: Keys.color)
         try encoder.encode(self.beaconMajor, forKey: Keys.beaconMajor)
         try encoder.encode(self.zones, forKey: Keys.zones)
     }
