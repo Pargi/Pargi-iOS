@@ -69,6 +69,59 @@ extension Zone {
             return self.regions.map({ Annotation(region: $0, zone: self) })
         }
     }
+    
+    var isPoint: Bool {
+        return self.regions.count == 1 && self.regions.first?.points.count == 1
+    }
+    
+    ///
+    /// Determine whether the zone contains a location or not
+    /// Keep in mind that if a zone is a point, then the coordinate
+    /// can never be "contained" and as such this always returns false
+    /// when .isPoint == true
+    ///
+    /// Similarly always false for zones with no regions
+    ///
+    func contains(coordinate: CLLocationCoordinate2D) -> Bool {
+        guard !self.isPoint else {
+            return false
+        }
+        
+        guard self.regions.count >= 1 else {
+            return false
+        }
+        
+        // Find the first region that contains (if there is one, that is also proof that we contain)
+        return self.regions.first(where: { (region) in
+            return region.contains(coordinate: coordinate)
+        }) != nil
+    }
+    
+    ///
+    /// If Zone is a point, then distance from it, if a region, then distance from the
+    /// (combined if multiple) centroid
+    ///
+    func distance(from: CLLocationCoordinate2D) -> CLLocationDistance {
+        let coordinates = self.regions.map({ $0.centerCoordinate })
+        
+        guard coordinates.count > 1 else {
+            if let first = coordinates.first {
+                let p1 = MKMapPointForCoordinate(from)
+                let p2 = MKMapPointForCoordinate(first)
+                
+                return MKMetersBetweenMapPoints(p1, p2)
+            }
+            
+            return CLLocationDistanceMax
+        }
+        
+        // More than one coordinate, create a temp polygon and find the distance to its center
+        let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
+        let p1 = MKMapPointForCoordinate(from)
+        let p2 = MKMapPointForCoordinate(polygon.coordinate)
+        
+        return MKMetersBetweenMapPoints(p1, p2)
+    }
 }
 
 fileprivate extension Zone.Region {
@@ -100,5 +153,80 @@ fileprivate extension Zone.Region {
             
             return MKPolygon(coordinates: coordinates, count: coordinates.count, interiorPolygons: interiorPolygons)
         }
+    }
+    
+    fileprivate var centerCoordinate: CLLocationCoordinate2D {
+        get {
+            guard self.points.count > 1 else {
+                if let point = self.points.first {
+                    return CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+                }
+                
+                return kCLLocationCoordinate2DInvalid
+            }
+            
+            guard let polygon = self.polygon else {
+                return kCLLocationCoordinate2DInvalid
+            }
+            
+            return polygon.coordinate
+        }
+    }
+    
+    fileprivate func contains(coordinate: CLLocationCoordinate2D) -> Bool {
+        guard let polygon = self.polygon else {
+            return false
+        }
+        
+        let mapPoint = MKMapPointForCoordinate(coordinate)
+        
+        guard MKMapRectContainsPoint(polygon.boundingMapRect, mapPoint) else {
+            return false
+        }
+        
+        // Count the number of crossings to determine if inside (so-called ray-casting)
+        var lastPoint = self.points.last!
+        var isInside = false
+        let x = coordinate.longitude
+        
+        self.points.forEach { point in
+            var x1 = lastPoint.longitude
+            var x2 = point.longitude
+            var dx = x2 - x1
+            
+            if abs(dx) > 180.0 {
+                // Likely around the 180th meridian, normalise (this app will likely never hit this code)
+                if x > 0 {
+                    while x1 < 0 {
+                        x1 += 360.0
+                    }
+                    while x2 < 0 {
+                        x2 += 360.0
+                    }
+                } else {
+                    while x1 > 0 {
+                        x1 -= 360.0
+                    }
+                    while x2 > 0 {
+                        x2 -= 360.0
+                    }
+                }
+                
+                dx = x2 - x1
+            }
+            
+            if (x1 <= x && x2 > x) || (x1 >= x && x2 < x) {
+                let grad = (coordinate.latitude - lastPoint.latitude) / dx
+                let intersectAtLat = lastPoint.latitude + ((x - x1) * grad)
+                
+                if intersectAtLat > coordinate.latitude {
+                    isInside = !isInside
+                }
+            }
+            
+            lastPoint = point
+        }
+        
+        return isInside
     }
 }
