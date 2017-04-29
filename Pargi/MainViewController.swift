@@ -13,7 +13,19 @@ import Foundation
 import UIKit
 import Pulley
 
-class MainViewController: PulleyViewController, MapViewControllerDelegate {
+class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate {
+    
+    fileprivate var mapViewController: MapViewController? {
+        get {
+            return self.primaryContentViewController as? MapViewController
+        }
+    }
+    
+    fileprivate var detailViewController: DetailViewController? {
+        get {
+            return self.drawerContentViewController as? DetailViewController
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +33,29 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate {
         // Grab all zones and force them down to the map/detail views
         let zones = ApplicationData.currentDatabase.zones
         
-        if let mapView = self.primaryContentViewController as? MapViewController {
+        if let mapView = self.mapViewController {
             mapView.zones = zones
             mapView.delegate = self
+        }
+        
+        if let detailView = self.detailViewController {
+            detailView.delegate = self
         }
     }
     
     // MARK: MapViewControllerDelegate
     
     func mapViewController(_ controller: MapViewController, didUpdateVisibleZones zones: [Zone]) {
-        let top = zones[0..<min(zones.count, 5)]
-        print("Closest zones \(top.count) => \(top.map({ $0.code }))")
+        let bestMatches = Array(zones[0..<min(zones.count, 3)])
+        
+        if let detailView = self.drawerContentViewController as? DetailViewController {
+            detailView.zones = bestMatches
+        }
+    }
+    
+    // MARK: DetailViewControllerDelegate
+    
+    func detailViewController(_ controller: DetailViewController, didSelectZone zone: Zone?) {
+        print("Selected zone \(zone)")
     }
 }
