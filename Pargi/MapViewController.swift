@@ -14,7 +14,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
     @IBOutlet var mapView: MKMapView!
     
     private let mapMaxAltitude: CLLocationDistance = 500.0
-    var trackUserLocation: Bool = false
+    var trackUserLocation: Bool = true
     
     var delegate: MapViewControllerDelegate? = nil
     
