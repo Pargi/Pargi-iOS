@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -126,17 +127,104 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-jo-AQL">
+                                <rect key="frame" x="21" y="25" width="333" height="38"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-78-ihi">
+                                        <rect key="frame" x="0.0" y="0.0" width="81" height="38"/>
+                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
+                                        <state key="normal" title="KESKLINN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="78T-5U-b3N"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-Tw-tY7">
+                                        <rect key="frame" x="89" y="0.0" width="47" height="38"/>
+                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
+                                        <state key="normal" title="EP2">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="yYO-O4-DFg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-GD-uIo">
+                                        <rect key="frame" x="144" y="0.0" width="46" height="38"/>
+                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
+                                        <state key="normal" title="EP7">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Wuc-EY-6qV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-yY-4Pe">
+                                        <rect key="frame" x="198" y="0.0" width="63" height="38"/>
+                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
+                                        <state key="normal" title="EXTRA">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Zpm-Dr-uDI"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-OD-SS3" userLabel="Buffer">
+                                        <rect key="frame" x="269" y="0.0" width="64" height="38"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="i9L-Ea-ImG"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="J28-bG-Y0U" firstAttribute="top" secondItem="HfT-Jn-ifY" secondAttribute="bottom" constant="8" id="NGD-cv-sCI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IqU-jo-AQL" secondAttribute="trailing" constant="5" id="UTp-62-pj4"/>
+                            <constraint firstItem="IqU-jo-AQL" firstAttribute="top" secondItem="J28-bG-Y0U" secondAttribute="bottom" constant="12" id="YK8-hP-hW0"/>
                             <constraint firstItem="J28-bG-Y0U" firstAttribute="centerX" secondItem="gyJ-Qw-ze1" secondAttribute="centerX" id="drO-g2-HHK"/>
+                            <constraint firstItem="IqU-jo-AQL" firstAttribute="leading" secondItem="gyJ-Qw-ze1" secondAttribute="leadingMargin" constant="5" id="ntL-LI-3GM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="view" destination="gyJ-Qw-ze1" id="c82-63-pVZ"/>
+                        <outlet property="zoneStackView" destination="IqU-jo-AQL" id="sGy-kF-IXX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrO-xj-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="638" y="165"/>
+            <point key="canvasLocation" x="637.60000000000002" y="164.6176911544228"/>
         </scene>
     </scenes>
 </document>
