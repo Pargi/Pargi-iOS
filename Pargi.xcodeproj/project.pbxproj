@@ -29,6 +29,8 @@
 		8E3921641EB203C100277701 /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921631EB203C100277701 /* ApplicationData.swift */; };
 		8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921651EB2071C00277701 /* JSONParsing.swift */; };
 		8E3921681EB227CF00277701 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921671EB227CF00277701 /* Networking.swift */; };
+		8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */; };
+		8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */; };
 		8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */; };
 		8ED7E8211EB1BCED00F13023 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E8201EB1BCED00F13023 /* MapViewController.swift */; };
 		8ED7E8241EB1BCED00F13023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ED7E8221EB1BCED00F13023 /* Main.storyboard */; };
@@ -90,6 +92,8 @@
 		8E3921651EB2071C00277701 /* JSONParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsing.swift; sourceTree = "<group>"; };
 		8E3921671EB227CF00277701 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
+		8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		8ED7E81B1EB1BCED00F13023 /* Pargi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pargi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ED7E8201EB1BCED00F13023 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 				8E2D42B11EB2503800F286CF /* MapKitExtensions.swift */,
 				8E2D42B31EB269D400F286CF /* UIKitExtensions.swift */,
 				8E2D42B61EB274BF00F286CF /* AnnotationView.swift */,
+				8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				8ED7E8201EB1BCED00F13023 /* MapViewController.swift */,
 				8E2D42AC1EB23CEF00F286CF /* DetailViewController.swift */,
 				8ED7E8221EB1BCED00F13023 /* Main.storyboard */,
+				8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */,
 				8ED7E8251EB1BCED00F13023 /* Assets.xcassets */,
 				8ED7E8271EB1BCED00F13023 /* LaunchScreen.storyboard */,
 				8ED7E82A1EB1BCED00F13023 /* Info.plist */,
@@ -353,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */,
 				8E39215E1EB2033800277701 /* Data.json in Resources */,
 				8ED7E8291EB1BCED00F13023 /* LaunchScreen.storyboard in Resources */,
 				8ED7E8261EB1BCED00F13023 /* Assets.xcassets in Resources */,
@@ -409,6 +416,7 @@
 				8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */,
 				8E2D42B41EB269D400F286CF /* UIKitExtensions.swift in Sources */,
 				8E2D42AD1EB23CEF00F286CF /* DetailViewController.swift in Sources */,
+				8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */,
 				8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */,
 				8E3921451EB1E3BA00277701 /* ZoneGroup.swift in Sources */,
 				8E2D42B21EB2503800F286CF /* MapKitExtensions.swift in Sources */,
