@@ -22,7 +22,7 @@ extension Zone {
 }
 
 fileprivate let CalendarFirstDay = NSCalendar.autoupdatingCurrent.firstWeekday
-fileprivate let CalendarShortDays = DateFormatter().shortStandaloneWeekdaySymbols.shift(withDistance: CalendarFirstDay)
+fileprivate let CalendarShortDays = DateFormatter().shortStandaloneWeekdaySymbols.shift(withDistance: (CalendarFirstDay - 1))
 fileprivate let Formatter: DateComponentsFormatter = {
     let formatter = DateComponentsFormatter()
     formatter.allowedUnits = [.hour, .minute]
