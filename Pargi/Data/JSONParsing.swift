@@ -108,11 +108,12 @@ fileprivate extension Zone {
 
 fileprivate extension Zone.Tariff {
     init?(dictionary: [String: Any]) {
-        guard let days = dictionary["days"] as? Int, let periods = dictionary["periods"] as? [String: Double] else {
+        guard let days = dictionary["days"] as? [Int], let periods = dictionary["periods"] as? [String: Double] else {
             return nil
         }
         
-        self.days = Zone.Tariff.Day(rawValue: days)
+        let daySum = days.flatMap({ Zone.Tariff.Day(calendarValue: $0)?.rawValue }).reduce(0, { return $0 + $1 })
+        self.days = Zone.Tariff.Day(rawValue: daySum)
         self.periods = periods.map(transform: { (Int($0)!, $1) })
         
         self.periodStart = dictionary["start"] as? Int
