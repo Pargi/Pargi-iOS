@@ -45,3 +45,16 @@ extension UIColor {
         )
     }
 }
+
+extension String {
+    func attributedCaption() -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineHeightMultiple = 1.25
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightRegular),
+                          NSForegroundColorAttributeName: UIColor(hex: "1C3244"),
+                          NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: self, attributes: attributes)
+    }
+}
