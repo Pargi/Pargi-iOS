@@ -31,6 +31,7 @@
 		8E3921681EB227CF00277701 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921671EB227CF00277701 /* Networking.swift */; };
 		8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */; };
 		8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */; };
+		8EA9E0FD1EB5FD4E007D1BA7 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */; };
 		8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */; };
 		8ED7E8211EB1BCED00F13023 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E8201EB1BCED00F13023 /* MapViewController.swift */; };
 		8ED7E8241EB1BCED00F13023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ED7E8221EB1BCED00F13023 /* Main.storyboard */; };
@@ -94,6 +95,7 @@
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
 		8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
+		8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		8ED7E81B1EB1BCED00F13023 /* Pargi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pargi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ED7E8201EB1BCED00F13023 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				8E2D42B31EB269D400F286CF /* UIKitExtensions.swift */,
 				8E2D42B61EB274BF00F286CF /* AnnotationView.swift */,
 				8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */,
+				8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				8E2D42AF1EB24F7200F286CF /* MainViewController.swift in Sources */,
 				8E3921681EB227CF00277701 /* Networking.swift in Sources */,
 				8E2D42B71EB274BF00F286CF /* AnnotationView.swift in Sources */,
+				8EA9E0FD1EB5FD4E007D1BA7 /* ModelExtensions.swift in Sources */,
 				8E39213F1EB1C44200277701 /* Database.swift in Sources */,
 				8E3921431EB1CC7900277701 /* Zone.swift in Sources */,
 				8E3921641EB203C100277701 /* ApplicationData.swift in Sources */,
