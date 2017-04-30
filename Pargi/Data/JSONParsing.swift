@@ -112,7 +112,7 @@ fileprivate extension Zone.Tariff {
             return nil
         }
         
-        let daySum = days.flatMap({ Zone.Tariff.Day(calendarValue: $0)?.rawValue }).reduce(0, { return $0 + $1 })
+        let daySum = days.flatMap({ 1 << ($0 - 1) }).reduce(0, { return $0 + $1 })
         self.days = Zone.Tariff.Day(rawValue: daySum)
         self.periods = periods.map(transform: { (Int($0)!, $1) })
         
