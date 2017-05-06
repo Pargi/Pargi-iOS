@@ -51,7 +51,11 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
             self.parkButton.isEnabled = self.selectedZone != nil
             
             // Update tariff label (attributed)
-            self.zoneTariffLabel.attributedText = self.selectedZone?.localizedTariffDescription().attributedCaption()
+            if let attributed = self.selectedZone?.localizedTariffDescription().attributedCaption() {
+                self.zoneTariffLabel.attributedText = attributed
+            } else {
+                self.zoneTariffLabel.text = "-"
+            }
             
             // Let our delegate know
             self.delegate?.detailViewController(self, didSelectZone: self.selectedZone)
