@@ -72,3 +72,36 @@ extension NSAttributedString {
         self.init(attributedString: attributedString)
     }
 }
+
+extension UIImage {
+    ///
+    /// Create a template image of a rounded stroked rect, which is optionally filled
+    ///
+    class func roundedImage(cornerRadius: CGFloat, lineWidth: CGFloat, fill: Bool) -> UIImage {
+        let size = CGSize(width: cornerRadius * 2 + 1.0 + lineWidth, height: cornerRadius * 2 + 1.0 + lineWidth)
+        let rect = CGRect(origin: CGPoint.zero, size: size).insetBy(dx: lineWidth / 2.0, dy: lineWidth / 2.0)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        let ctx = UIGraphicsGetCurrentContext()
+        let path = CGPath(roundedRect: rect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil)
+        
+        ctx?.setStrokeColor(UIColor.black.cgColor)
+        ctx?.setFillColor(UIColor.black.cgColor)
+        ctx?.setLineWidth(lineWidth)
+        
+        ctx?.addPath(path)
+        ctx?.strokePath()
+        
+        if fill {
+            ctx?.addPath(path)
+            ctx?.fillPath()
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    
+        let edge = cornerRadius + lineWidth
+        return image!.resizableImage(withCapInsets: UIEdgeInsets(top: edge, left: edge, bottom: edge, right: edge), resizingMode: .tile).withRenderingMode(.alwaysTemplate)
+    }
+}
