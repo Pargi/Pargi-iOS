@@ -24,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FfJ-To-9ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1273" y="-128"/>
+            <point key="canvasLocation" x="-1018" y="-128"/>
         </scene>
         <!--Pargi-->
         <scene sceneID="WFC-mx-4Wl">
@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hjk-Yi-P6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="637.60000000000002" y="-253.2233883058471"/>
+            <point key="canvasLocation" x="639" y="-277"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="SKz-HF-azQ">
@@ -116,7 +116,7 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J28-bG-Y0U">
                                 <rect key="frame" x="169" y="8" width="36" height="5"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="ShX-79-54E"/>
                                     <constraint firstAttribute="width" constant="36" id="h3t-Ca-8Ko"/>
@@ -127,104 +127,181 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-jo-AQL">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npT-gq-jUn">
                                 <rect key="frame" x="21" y="25" width="333" height="38"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-78-ihi">
-                                        <rect key="frame" x="0.0" y="0.0" width="81" height="38"/>
-                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
-                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
-                                        <state key="normal" title="KESKLINN">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-jo-AQL">
+                                        <rect key="frame" x="0.0" y="0.0" width="286" height="38"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-78-ihi" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="71" height="38"/>
+                                                <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" title="KESKLINN">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="78T-5U-b3N"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-Tw-tY7" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                                <rect key="frame" x="77" y="0.0" width="37" height="38"/>
+                                                <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" title="EP2">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="yYO-O4-DFg"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-GD-uIo" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                                <rect key="frame" x="120" y="0.0" width="36" height="38"/>
+                                                <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" title="EP7">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Wuc-EY-6qV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-yY-4Pe" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                                <rect key="frame" x="162" y="0.0" width="53" height="38"/>
+                                                <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" title="EXTRA">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Zpm-Dr-uDI"/>
+                                                </connections>
+                                            </button>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTf-nQ-wLW" userLabel="No Zones">
+                                                <rect key="frame" x="221" y="0.0" width="9" height="38"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-OD-SS3" userLabel="Buffer">
+                                                <rect key="frame" x="236" y="0.0" width="50" height="38"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="i9L-Ea-ImG"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fN0-Ld-5ag" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                        <rect key="frame" x="286" y="0.0" width="47" height="38"/>
+                                        <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Pargi">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.027450980392156862" green="0.5607843137254902" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="10" name="SFUIDisplay-Heavy"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.027450980390000001" green="0.56078431370000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="78T-5U-b3N"/>
-                                        </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-Tw-tY7">
-                                        <rect key="frame" x="89" y="0.0" width="47" height="38"/>
-                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
-                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
-                                        <state key="normal" title="EP2">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="yYO-O4-DFg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-GD-uIo">
-                                        <rect key="frame" x="144" y="0.0" width="46" height="38"/>
-                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
-                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
-                                        <state key="normal" title="EP7">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Wuc-EY-6qV"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-yY-4Pe">
-                                        <rect key="frame" x="198" y="0.0" width="63" height="38"/>
-                                        <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
-                                        <inset key="contentEdgeInsets" minX="13" minY="8" maxX="13" maxY="8"/>
-                                        <state key="normal" title="EXTRA">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Zpm-Dr-uDI"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-OD-SS3" userLabel="Buffer">
-                                        <rect key="frame" x="269" y="0.0" width="64" height="38"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="i9L-Ea-ImG"/>
+                                    <constraint firstAttribute="height" constant="38" id="GGx-Ni-Ydo"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhs-i3-Acm" userLabel="Separator">
+                                <rect key="frame" x="21" y="75" width="333" height="1"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="RyD-EI-g2E"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m4-jR-Tsc">
+                                <rect key="frame" x="21" y="88" width="333" height="33"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Line 1 of price
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="SFUIDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Line 2 of price">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="SFUIDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="3" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mhs-i3-Acm" firstAttribute="top" secondItem="npT-gq-jUn" secondAttribute="bottom" constant="12" id="749-4a-saz"/>
+                            <constraint firstItem="npT-gq-jUn" firstAttribute="top" secondItem="J28-bG-Y0U" secondAttribute="bottom" constant="12" id="Fn0-ad-jJj"/>
                             <constraint firstItem="J28-bG-Y0U" firstAttribute="top" secondItem="HfT-Jn-ifY" secondAttribute="bottom" constant="8" id="NGD-cv-sCI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IqU-jo-AQL" secondAttribute="trailing" constant="5" id="UTp-62-pj4"/>
-                            <constraint firstItem="IqU-jo-AQL" firstAttribute="top" secondItem="J28-bG-Y0U" secondAttribute="bottom" constant="12" id="YK8-hP-hW0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5m4-jR-Tsc" secondAttribute="trailing" constant="5" id="PpN-S5-DaU"/>
+                            <constraint firstItem="mhs-i3-Acm" firstAttribute="leading" secondItem="gyJ-Qw-ze1" secondAttribute="leadingMargin" constant="5" id="SgM-qa-WHo"/>
+                            <constraint firstItem="npT-gq-jUn" firstAttribute="leading" secondItem="gyJ-Qw-ze1" secondAttribute="leadingMargin" constant="5" id="axT-YO-yxt"/>
+                            <constraint firstItem="5m4-jR-Tsc" firstAttribute="leading" secondItem="gyJ-Qw-ze1" secondAttribute="leadingMargin" constant="5" id="c4a-o7-Cop"/>
                             <constraint firstItem="J28-bG-Y0U" firstAttribute="centerX" secondItem="gyJ-Qw-ze1" secondAttribute="centerX" id="drO-g2-HHK"/>
-                            <constraint firstItem="IqU-jo-AQL" firstAttribute="leading" secondItem="gyJ-Qw-ze1" secondAttribute="leadingMargin" constant="5" id="ntL-LI-3GM"/>
+                            <constraint firstItem="5m4-jR-Tsc" firstAttribute="top" secondItem="mhs-i3-Acm" secondAttribute="bottom" constant="12" id="gmr-fE-NiS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mhs-i3-Acm" secondAttribute="trailing" constant="5" id="jLF-hl-F3g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="npT-gq-jUn" secondAttribute="trailing" constant="5" id="vn8-6T-ZML"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="parkButton" destination="fN0-Ld-5ag" id="zAu-yK-4HG"/>
                         <outlet property="view" destination="gyJ-Qw-ze1" id="c82-63-pVZ"/>
+                        <outlet property="zeroZonesLabel" destination="CTf-nQ-wLW" id="Uyn-Po-ka6"/>
                         <outlet property="zoneStackView" destination="IqU-jo-AQL" id="sGy-kF-IXX"/>
+                        <outlet property="zoneTariffLabel" destination="5m4-jR-Tsc" id="Hp9-nr-M2L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrO-xj-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="637.60000000000002" y="164.6176911544228"/>
+            <point key="canvasLocation" x="637.60000000000002" y="67.466266866566727"/>
         </scene>
     </scenes>
 </document>

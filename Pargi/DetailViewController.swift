@@ -17,6 +17,11 @@ import Pulley
 class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate {
     
     @IBOutlet var zoneStackView: UIStackView!
+    @IBOutlet var parkButton: UIButton!
+    @IBOutlet var zeroZonesLabel: UILabel!
+    
+    // Selected zone information
+    @IBOutlet var zoneTariffLabel: UILabel!
     
     var delegate: DetailViewControllerDelegate? = nil
     
@@ -42,6 +47,13 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
                 })
             }
             
+            // Park button should be enabled only if we have a selected zone
+            self.parkButton.isEnabled = self.selectedZone != nil
+            
+            // Update tariff label (attributed)
+            self.zoneTariffLabel.attributedText = self.selectedZone?.localizedTariffDescription().attributedCaption()
+            
+            // Let our delegate know
             self.delegate?.detailViewController(self, didSelectZone: self.selectedZone)
         }
     }
@@ -70,7 +82,34 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
             
             // Default selected zone to the first of the new zones
             self.selectedZone = self.zones.first
+            
+            // If no zones, then unhide the missing zones label
+            self.zeroZonesLabel.isHidden = self.zones.count > 0
         }
+    }
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Missing zones label
+        self.zeroZonesLabel.text = "UI.NoZonesFound".localized(withComment: "No zones where found")
+        
+        // Update park button
+        let font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightHeavy)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        var attributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph]
+        let buttonTitle = NSMutableAttributedString(string: "UI.CTA.Park".localized(withComment: "Call to action: Park"), attributes: attributes)
+        
+        attributes[NSFontAttributeName] = UIFont.systemFont(ofSize: 10.0, weight: UIFontWeightRegular)
+        let licenseTitle = NSAttributedString(string: "\nPROOV123", attributes: attributes)
+        buttonTitle.append(licenseTitle)
+        
+        self.parkButton.titleLabel?.numberOfLines = 0
+        self.parkButton.setAttributedTitle(buttonTitle, for: .normal)
     }
     
     // MARK: Actions
