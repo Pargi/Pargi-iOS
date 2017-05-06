@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CTf-nQ-wLW"; */
+"CTf-nQ-wLW.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "KESKLINN"; ObjectID = "VYG-78-ihi"; */
+"VYG-78-ihi.normalTitle" = "KESKLINN";
+
+/* Class = "UILabel"; text = "Hinnainfo"; ObjectID = "X1y-uz-43G"; */
+"X1y-uz-43G.text" = "Hinnainfo";
+
+/* Class = "UIViewController"; title = "Pargi"; ObjectID = "gDu-dQ-fh5"; */
+"gDu-dQ-fh5.title" = "Pargi";
+
+/* Class = "UIButton"; normalTitle = "EP2"; ObjectID = "hdJ-Tw-tY7"; */
+"hdJ-Tw-tY7.normalTitle" = "EP2";
+
+/* Class = "UIButton"; normalTitle = "EXTRA"; ObjectID = "j8S-yY-4Pe"; */
+"j8S-yY-4Pe.normalTitle" = "EXTRA";
+
+/* Class = "UIButton"; normalTitle = "EP7"; ObjectID = "jPE-GD-uIo"; */
+"jPE-GD-uIo.normalTitle" = "EP7";
+
+/* Class = "UINavigationItem"; title = "Pargi"; ObjectID = "rQj-WN-uWm"; */
+"rQj-WN-uWm.title" = "Pargi";

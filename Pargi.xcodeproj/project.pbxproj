@@ -93,6 +93,7 @@
 		8E3921631EB203C100277701 /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		8E3921651EB2071C00277701 /* JSONParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsing.swift; sourceTree = "<group>"; };
 		8E3921671EB227CF00277701 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		8E66BF781EBDBA4800197C1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
 		8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -451,6 +452,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8ED7E8231EB1BCED00F13023 /* Base */,
+				8E66BF781EBDBA4800197C1B /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
