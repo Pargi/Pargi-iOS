@@ -35,7 +35,9 @@ Building this project will require [Carthage](https://github.com/Carthage/Cartha
 
 ## Contributing
 
-Issues and Pull Requests to the project are more than welcome. The database that Pargi uses for its parking zones is located at a [separate repository](https://github.com/Pargi/Data), all suggestions regarding the database should go there. Main focus on external contributions should be on making the code better, in terms of readability and good practices. As the intent of the project is to provide a fully-fledged application to learn from, it makes sense to keep the list of features limited, however, feature requests are welcome as well. For ideas, have a look at the feature list above.
+Issues and Pull Requests to the project are more than welcome. The database that Pargi uses for its parking zones is located at a [separate repository](https://github.com/Pargi/Data), all suggestions regarding the database should go there.
+
+Main focus on external contributions should be on making the code better, in terms of readability and good practices. As the intent of the project is to provide a fully-fledged application to learn from, it makes sense to keep the list of features limited, however, feature requests are welcome as well. For ideas, have a look at the feature list above.
 
 ## License
 
