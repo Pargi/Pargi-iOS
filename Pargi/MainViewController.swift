@@ -43,6 +43,12 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         }
     }
     
+    // MARK: Segues
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        
+    }
+    
     // MARK: MapViewControllerDelegate
     
     func mapViewController(_ controller: MapViewController, didUpdateVisibleZones zones: [Zone]) {

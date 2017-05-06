@@ -1,3 +1,8 @@
 "UI.CTA.Park" = "Pargi";
 "UI.NoZonesFound" = "Tsoone ei leitud";
 "UI.NoPriceInfo" = "Hinnainfo puudub";
+
+"UI.About.Version" = "Versioon";
+"UI.About.DatabaseVersion" = "Andmebaasi versioon";
+"UI.About.Acknowledgments.HTML" = "Pargi 😍 ja kasutab - <a href=\"https://github.com/52inc/Pulley\">Pulley</a> ja <a href=\"https://github.com/Weebly/Cereal\">Cereal</a>";
+"UI.About.OSS.HTML" = "Pargi <a href=\"https://github.com/Pargi/Pargi-iOS\">lähtekood</a> ja <a href=\"https://github.com/Pargi/Data\">tsoonide andmebaas</a>";
