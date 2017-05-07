@@ -44,5 +44,8 @@
 /* Class = "UITextField"; placeholder = "Auto numbrimärk"; ObjectID = "q40-6n-bP9"; */
 "q40-6n-bP9.placeholder" = "Auto numbrimärk";
 
+/* Class = "UIViewController"; title = "Auto numbrimärk"; ObjectID = "ekp-JW-3Bu"; */
+"ekp-JW-3Bu.title" = "Auto numbrimärk";
+
 /* Class = "UINavigationItem"; title = "Pargi"; ObjectID = "rQj-WN-uWm"; */
 "rQj-WN-uWm.title" = "Pargi";
