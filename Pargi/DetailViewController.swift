@@ -19,11 +19,21 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
     @IBOutlet var zoneStackView: UIStackView!
     @IBOutlet var parkButton: UIButton!
     @IBOutlet var zeroZonesLabel: UILabel!
+    @IBOutlet var licensePlateLabel: UILabel!
     
     // Selected zone information
     @IBOutlet var zoneTariffLabel: UILabel!
     
     var delegate: DetailViewControllerDelegate? = nil
+    
+    var licensePlateNumber: String? = nil {
+        didSet {
+            self.updateParkButton()
+            
+            // License plate label
+            self.licensePlateLabel?.text = self.licensePlateNumber ?? "-"
+        }
+    }
     
     var selectedZone: Zone? = nil {
         didSet {
@@ -47,8 +57,8 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
                 })
             }
             
-            // Park button should be enabled only if we have a selected zone
-            self.parkButton.isEnabled = self.selectedZone != nil
+            // Park button
+            self.updateParkButton()
             
             // Update tariff label (attributed)
             if let attributed = self.selectedZone?.localizedTariffDescription().attributedCaption() {
@@ -100,20 +110,42 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         // Missing zones label
         self.zeroZonesLabel.text = "UI.NoZonesFound".localized(withComment: "No zones where found")
         
+        // License plate label
+        self.licensePlateLabel.text = self.licensePlateNumber ?? "-"
+        
         // Update park button
+        self.updateParkButton()
+        self.parkButton.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: false), for: .normal)
+        self.parkButton.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: true), for: .highlighted)
+    }
+    
+    // MARK: UI Updates
+    
+    private func updateParkButton() {
         let font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightHeavy)
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
         
-        var attributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph]
+        var attributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSForegroundColorAttributeName: self.parkButton.tintColor]
         let buttonTitle = NSMutableAttributedString(string: "UI.CTA.Park".localized(withComment: "Call to action: Park"), attributes: attributes)
         
-        attributes[NSFontAttributeName] = UIFont.systemFont(ofSize: 10.0, weight: UIFontWeightRegular)
-        let licenseTitle = NSAttributedString(string: "\nPROOV123", attributes: attributes)
-        buttonTitle.append(licenseTitle)
+        if let license = self.licensePlateNumber {
+            attributes[NSFontAttributeName] = UIFont.systemFont(ofSize: 10.0, weight: UIFontWeightRegular)
+            let licenseTitle = NSAttributedString(string: "\n\(license)", attributes: attributes)
+            buttonTitle.append(licenseTitle)
+        }
         
-        self.parkButton.titleLabel?.numberOfLines = 0
-        self.parkButton.setAttributedTitle(buttonTitle, for: .normal)
+        self.parkButton?.titleLabel?.numberOfLines = 0
+        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
+        
+        buttonTitle.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
+        self.parkButton?.setAttributedTitle(buttonTitle, for: .highlighted)
+        
+        buttonTitle.addAttributes([NSForegroundColorAttributeName: self.parkButton?.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
+        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
+        
+        // Should only be tappable if there is a zone and a license
+        self.parkButton.isEnabled = self.selectedZone != nil && self.licensePlateNumber != nil
     }
     
     // MARK: Actions
@@ -124,6 +156,22 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         }
         
         self.selectedZone = self.zones[idx]
+    }
+    
+    // MARK: Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Make sure to pass along the current value to the editor
+        if segue.identifier == "changeLicensePlateNumber", let licenseVC = segue.destination as? CarLicenseViewController {
+            licenseVC.licensePlateNumber = self.licensePlateNumber
+        }
+    }
+    
+    @IBAction func unwindToDetail(segue: UIStoryboardSegue) {
+        // If identifier is "licensePlateNumberChanged", then we can obtain the new license plate number from the VC
+        if segue.identifier == "licensePlateNumberChanged", let licenseVC = segue.source as? CarLicenseViewController {
+            self.licensePlateNumber = licenseVC.licensePlateNumber
+        }
     }
     
     // MARK: PulleyDrawerViewControllerDelegate

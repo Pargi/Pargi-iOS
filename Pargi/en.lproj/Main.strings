@@ -1,12 +1,30 @@
 
+/* Class = "UILabel"; text = "Versioon "; ObjectID = "8yj-sO-fbR"; */
+"8yj-sO-fbR.text" = "Versioon";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "CTf-nQ-wLW"; */
 "CTf-nQ-wLW.text" = "Label";
+
+/* Class = "UITextView"; text = "Source Code"; ObjectID = "DFK-1G-OZy"; */
+"DFK-1G-OZy.text" = "Source Code";
+
+/* Class = "UILabel"; text = "PROOV123"; ObjectID = "FX3-wT-5g2"; */
+"FX3-wT-5g2.text" = "PROOV123";
+
+/* Class = "UITextView"; text = "Acknowledgments"; ObjectID = "U4a-L4-aS0"; */
+"U4a-L4-aS0.text" = "Acknowledgments";
 
 /* Class = "UIButton"; normalTitle = "KESKLINN"; ObjectID = "VYG-78-ihi"; */
 "VYG-78-ihi.normalTitle" = "KESKLINN";
 
-/* Class = "UILabel"; text = "Hinnainfo"; ObjectID = "X1y-uz-43G"; */
-"X1y-uz-43G.text" = "Hinnainfo";
+/* Class = "UILabel"; text = "Auto"; ObjectID = "X1y-uz-43G"; */
+"X1y-uz-43G.text" = "Auto";
+
+/* Class = "UILabel"; text = "Pargi"; ObjectID = "X55-jH-KSw"; */
+"X55-jH-KSw.text" = "Pargi";
+
+/* Class = "UILabel"; text = "Andmebaasi versioon "; ObjectID = "dPp-uT-aIp"; */
+"dPp-uT-aIp.text" = "Andmebaasi versioon";
 
 /* Class = "UIViewController"; title = "Pargi"; ObjectID = "gDu-dQ-fh5"; */
 "gDu-dQ-fh5.title" = "Pargi";
@@ -14,11 +32,17 @@
 /* Class = "UIButton"; normalTitle = "EP2"; ObjectID = "hdJ-Tw-tY7"; */
 "hdJ-Tw-tY7.normalTitle" = "EP2";
 
+/* Class = "UILabel"; text = "Hinnainfo"; ObjectID = "i3g-Jw-XSX"; */
+"i3g-Jw-XSX.text" = "Hinnainfo";
+
 /* Class = "UIButton"; normalTitle = "EXTRA"; ObjectID = "j8S-yY-4Pe"; */
 "j8S-yY-4Pe.normalTitle" = "EXTRA";
 
 /* Class = "UIButton"; normalTitle = "EP7"; ObjectID = "jPE-GD-uIo"; */
 "jPE-GD-uIo.normalTitle" = "EP7";
+
+/* Class = "UITextField"; placeholder = "Auto numbrimärk"; ObjectID = "q40-6n-bP9"; */
+"q40-6n-bP9.placeholder" = "Auto numbrimärk";
 
 /* Class = "UINavigationItem"; title = "Pargi"; ObjectID = "rQj-WN-uWm"; */
 "rQj-WN-uWm.title" = "Pargi";
