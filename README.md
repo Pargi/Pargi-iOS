@@ -16,7 +16,8 @@ This list contains all of the planned features of the 3.0 release.
 
 - [x] Display a map of all nearby zones
 - [x] Display information about a "selected" zone
-- [ ] Allow specifying the car license plate number to park, store previously used numbers and allow quickly picking one of them
+- [x] Allow specifying the car license plate number to park
+- [ ] Store previously used license plates and allow quickly picking one of them
 - [ ] Start/stop the parking by sending SMS/calling the correct number
 - [ ] Estimating the cost of the current parking period
 - [ ] Time based reminders about the parking
