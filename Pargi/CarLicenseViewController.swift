@@ -29,8 +29,6 @@ class CarLicenseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textField.text = self.licensePlateNumber
-        self.textField.inputAccessoryView = self.textFieldInputView
-        
         self.updateShortcutLicensePlateNumbers()
     }
     
@@ -58,6 +56,12 @@ class CarLicenseViewController: UIViewController {
             button.addTarget(self, action: #selector(shortcutLicensePlateTapped(sender:)), for: .touchUpInside)
             
             self.shortcutLicensePlatesStackView?.addArrangedSubview(button)
+        }
+        
+        if self.shortcutLicensePlateNumbers.count > 0 {
+            self.textField?.inputAccessoryView = self.textFieldInputView
+        } else {
+            self.textField?.inputAccessoryView = nil
         }
     }
     
