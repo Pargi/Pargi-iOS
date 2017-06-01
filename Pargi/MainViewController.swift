@@ -40,6 +40,8 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         
         if let detailView = self.detailViewController {
             detailView.delegate = self
+            detailView.previousLicensePlateNumbers = UserData.shared.otherLicensePlateNumbers
+            detailView.licensePlateNumber = UserData.shared.licensePlateNumber
         }
     }
     
@@ -63,5 +65,14 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
     
     func detailViewController(_ controller: DetailViewController, didSelectZone zone: Zone?) {
         print("Selected zone \(zone)")
+    }
+    
+    func detailViewController(_ controller: DetailViewController, didChangeLicensePlateNumber licensePlate: String?) {
+        UserData.shared.licensePlateNumber = licensePlate
+        
+        if let plate = licensePlate {
+            UserData.shared.otherLicensePlateNumbers.insert(plate, at: 0)
+            controller.previousLicensePlateNumbers = UserData.shared.otherLicensePlateNumbers
+        }
     }
 }
