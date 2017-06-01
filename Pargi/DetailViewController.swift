@@ -26,6 +26,7 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
     
     var delegate: DetailViewControllerDelegate? = nil
     
+    // Default license plate number to use
     var licensePlateNumber: String? = nil {
         didSet {
             self.updateParkButton()
@@ -34,6 +35,9 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
             self.licensePlateLabel?.text = self.licensePlateNumber ?? "-"
         }
     }
+    
+    // Previously used license plate numbers, which can be used as shortcuts
+    var previousLicensePlateNumbers: [String]? = nil
     
     var selectedZone: Zone? = nil {
         didSet {
@@ -164,6 +168,7 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         // Make sure to pass along the current value to the editor
         if segue.identifier == "changeLicensePlateNumber", let licenseVC = segue.destination as? CarLicenseViewController {
             licenseVC.licensePlateNumber = self.licensePlateNumber
+            licenseVC.shortcutLicensePlateNumbers = self.previousLicensePlateNumbers ?? []
         }
     }
     
@@ -171,6 +176,7 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         // If identifier is "licensePlateNumberChanged", then we can obtain the new license plate number from the VC
         if segue.identifier == "licensePlateNumberChanged", let licenseVC = segue.source as? CarLicenseViewController {
             self.licensePlateNumber = licenseVC.licensePlateNumber
+            self.delegate?.detailViewController(self, didChangeLicensePlateNumber: licenseVC.licensePlateNumber)
         }
     }
     
@@ -191,4 +197,5 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
 
 protocol DetailViewControllerDelegate {
     func detailViewController(_ controller: DetailViewController, didSelectZone zone: Zone?)
+    func detailViewController(_ controller: DetailViewController, didChangeLicensePlateNumber licensePlate: String?)
 }
