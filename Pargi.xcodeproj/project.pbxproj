@@ -30,6 +30,7 @@
 		8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921651EB2071C00277701 /* JSONParsing.swift */; };
 		8E3921681EB227CF00277701 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921671EB227CF00277701 /* Networking.swift */; };
 		8E585A391EBDC2AD0006342E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E585A381EBDC2AD0006342E /* InfoViewController.swift */; };
+		8E8432201EE0849200A1F892 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84321F1EE0849200A1F892 /* UserData.swift */; };
 		8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */; };
 		8EA9E0F61EB4AFCC007D1BA7 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */; };
 		8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */; };
@@ -97,6 +98,7 @@
 		8E3921671EB227CF00277701 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8E585A381EBDC2AD0006342E /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
+		8E84321F1EE0849200A1F892 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarLicenseViewController.swift; sourceTree = "<group>"; };
 		8E8904E01EBF5E690049EF7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				8E3921631EB203C100277701 /* ApplicationData.swift */,
 				8E3921651EB2071C00277701 /* JSONParsing.swift */,
 				8E3921671EB227CF00277701 /* Networking.swift */,
+				8E84321F1EE0849200A1F892 /* UserData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */,
 				8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */,
 				8E3921451EB1E3BA00277701 /* ZoneGroup.swift in Sources */,
+				8E8432201EE0849200A1F892 /* UserData.swift in Sources */,
 				8E2D42B21EB2503800F286CF /* MapKitExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
