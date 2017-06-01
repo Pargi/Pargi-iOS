@@ -35,6 +35,12 @@ struct Database {
             })
         }
     }
+    
+    func zone(forCode code: String) -> Zone? {
+        return self.zones.first { (zone) -> Bool in
+            return zone.code == code
+        }
+    }
 }
 
 extension Database: CustomStringConvertible {
