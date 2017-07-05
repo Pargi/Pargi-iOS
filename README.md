@@ -10,22 +10,6 @@ The contents of this repository include all of Pargi's iOS code, it is written 1
 
 Irregardless, cloning and building this repo should produce a working copy of the application, with a few caveats that come with iOS applications (for example, you would need to change the bundle identifier to generate a new valid provisioning profile)
 
-## Features
-
-This list contains all of the planned features of the 3.0 release.
-
-- [x] Display a map of all nearby zones
-- [x] Display information about a "selected" zone
-- [x] Allow specifying the car license plate number to park
-- [ ] Store previously used license plates and allow quickly picking one of them
-- [ ] Start/stop the parking by sending SMS/calling the correct number
-- [ ] Estimating the cost of the current parking period
-- [ ] Time based reminders about the parking
-- [ ] Support for Apple Watch (main focus - stopping parking)
-- [ ] Offer directions back to your car on a map
-- [ ] Geofenced reminders, displayed on the map during parking
-- [ ] Collect anonymised usage data
-
 ## Motivation
 
 You can read further about the motivation behind rebuilding and open sourcing this project on [Medium](https://medium.com/@henrinormak/pargi-goes-oss-64ee1eeab403)
