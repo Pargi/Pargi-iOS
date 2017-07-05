@@ -51,6 +51,14 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "searchZonesList", let target = (segue.destination as? UINavigationController)?.topViewController as? SearchViewController {
+            target.zones = ApplicationData.currentDatabase.zones
+        }
+    }
+    
     // MARK: MapViewControllerDelegate
     
     func mapViewController(_ controller: MapViewController, didUpdateVisibleZones zones: [Zone]) {
