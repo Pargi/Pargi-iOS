@@ -43,6 +43,7 @@ fileprivate let AlternateFormatter: DateComponentsFormatter = {
 fileprivate let CurrencyFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currency
+    formatter.maximumFractionDigits = 3
     formatter.currencyCode = "EUR"
     
     return formatter
