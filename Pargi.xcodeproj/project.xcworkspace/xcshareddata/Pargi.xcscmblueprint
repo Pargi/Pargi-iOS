@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ACF010F3320D820E911FC68C2FDE9BE2B278342A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "ACF010F3320D820E911FC68C2FDE9BE2B278342A" : 9223372036854775807,
+    "15F29C03E47CE6B66EEF481A8090BE42240F1822" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8F4B634C-3901-49D1-8DF7-01F456B3DC81",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "ACF010F3320D820E911FC68C2FDE9BE2B278342A" : "Pargi-iOS\/",
+    "15F29C03E47CE6B66EEF481A8090BE42240F1822" : "Pargi-iOS\/Data\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Pargi",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Pargi.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Pargi\/Data.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "15F29C03E47CE6B66EEF481A8090BE42240F1822"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Pargi\/Pargi-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ACF010F3320D820E911FC68C2FDE9BE2B278342A"
+    }
+  ]
+}

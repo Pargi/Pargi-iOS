@@ -54,7 +54,7 @@ class ModelTests: XCTestCase {
         let zoneA = exampleZone(seed: 20.0)
         let zoneB = exampleZone(seed: 40.0)
         
-        let provider = Provider(id: 1, name: "Provider", zones: [zoneA, zoneB], color: "AAA", beaconMajor: 0)
+        let provider = Provider(id: 1, name: "Provider", zones: [zoneA, zoneB], color: UIColor(hex: "FFF"), beaconMajor: 0)
         
         do {
             let data = try CerealEncoder.data(withRoot: provider)

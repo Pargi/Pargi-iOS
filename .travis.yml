@@ -1,0 +1,18 @@
+language: objective-c
+osx_image: xcode8.3
+
+xcode_project: Pargi.xcodeproj
+xcode_scheme: Pargi
+
+cache:
+  directories:
+  - Carthage
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
+
+script:
+  - xcodebuild clean
+  - xcodebuild test -project Pargi.xcodeproj -scheme Pargi -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'

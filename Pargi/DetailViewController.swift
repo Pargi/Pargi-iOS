@@ -143,7 +143,7 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
         
         buttonTitle.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
-        self.parkButton?.setAttributedTitle(buttonTitle, for: .highlighted)
+        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .highlighted)
         
         buttonTitle.addAttributes([NSForegroundColorAttributeName: self.parkButton?.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
         self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
