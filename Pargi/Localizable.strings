@@ -1,6 +1,11 @@
+"OK" = "OK";
+
 "UI.CTA.Park" = "Pargi";
 "UI.NoZonesFound" = "Tsoone ei leitud";
 "UI.NoPriceInfo" = "Hinnainfo puudub";
+
+"UI.NoSMSCapability" = "SMSi saatmine ebaõnnestus";
+"UI.SMSFailed" = "SMSi saatmine ebaõnnestus";
 
 "UI.About.Version" = "Versioon";
 "UI.About.DatabaseVersion" = "Andmebaasi versioon";

@@ -162,6 +162,10 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         self.selectedZone = self.zones[idx]
     }
     
+    @IBAction func tapped(parkButton: UIButton) {
+        self.delegate?.detailViewControllerDidPressParkButton(self)
+    }
+    
     // MARK: Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -198,4 +202,5 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
 protocol DetailViewControllerDelegate {
     func detailViewController(_ controller: DetailViewController, didSelectZone zone: Zone?)
     func detailViewController(_ controller: DetailViewController, didChangeLicensePlateNumber licensePlate: String?)
+    func detailViewControllerDidPressParkButton(_ controller: DetailViewController)
 }

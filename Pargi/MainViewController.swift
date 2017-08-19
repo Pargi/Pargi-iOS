@@ -11,9 +11,11 @@
 
 import Foundation
 import UIKit
+import MessageUI
 import Pulley
 
-class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate {
+class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate, MFMessageComposeViewControllerDelegate {
+    private var selectedZone: Zone? = nil
     
     fileprivate var mapViewController: MapViewController? {
         get {
@@ -72,7 +74,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
     // MARK: DetailViewControllerDelegate
     
     func detailViewController(_ controller: DetailViewController, didSelectZone zone: Zone?) {
-        print("Selected zone \(zone)")
+        self.selectedZone = zone
     }
     
     func detailViewController(_ controller: DetailViewController, didChangeLicensePlateNumber licensePlate: String?) {
@@ -81,6 +83,51 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         if let plate = licensePlate {
             UserData.shared.otherLicensePlateNumbers.insert(plate, at: 0)
             controller.previousLicensePlateNumbers = UserData.shared.otherLicensePlateNumbers
+        }
+    }
+    
+    func detailViewControllerDidPressParkButton(_ controller: DetailViewController) {
+        guard let zone = self.selectedZone, let licensePlate = UserData.shared.licensePlateNumber else {
+            return
+        }
+        
+        guard MFMessageComposeViewController.canSendText() else {
+            // Show an alert, we can't send SMS
+            let alert = UIAlertController(title: "UI.NoSMSCapability".localized(withComment: "SMSi saatmine ebaõnnestus"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK".localized(withComment: "OK"), style: .default))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        let composeController = MFMessageComposeViewController(licensePlate: licensePlate, zone: zone)
+        composeController.messageComposeDelegate = self
+        self.present(composeController, animated: true, completion: nil)
+    }
+    
+    // MARK: MFMessageComposeViewControllerDelegate
+    
+    public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {        
+        // Dismiss the composer
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+
+        switch result {
+        case .sent:
+            // Kick off parking tracking
+            var userData = UserData.shared
+            userData.isParked = true
+            userData.parkedAt = Date()
+            userData.currentParkedZone = self.selectedZone
+            
+            // TODO: Transfer to the parked view
+            print("TODO: Move to parked view")
+        case .failed:
+            // Failed, we should show an error
+            // Show an alert, we can't send SMS
+            let alert = UIAlertController(title: "UI.SMSFailed".localized(withComment: "SMSi saatmine ebaõnnestus"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK".localized(withComment: "OK"), style: .default))
+            self.present(alert, animated: true, completion: nil)
+        case .cancelled:
+            break
         }
     }
 }

@@ -29,6 +29,7 @@
 		8E3921641EB203C100277701 /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921631EB203C100277701 /* ApplicationData.swift */; };
 		8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921651EB2071C00277701 /* JSONParsing.swift */; };
 		8E3921681EB227CF00277701 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921671EB227CF00277701 /* Networking.swift */; };
+		8E5189201F47559400DBA892 /* MessageUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */; };
 		8E585A391EBDC2AD0006342E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E585A381EBDC2AD0006342E /* InfoViewController.swift */; };
 		8E8432201EE0849200A1F892 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84321F1EE0849200A1F892 /* UserData.swift */; };
 		8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */; };
@@ -97,6 +98,7 @@
 		8E3921631EB203C100277701 /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		8E3921651EB2071C00277701 /* JSONParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsing.swift; sourceTree = "<group>"; };
 		8E3921671EB227CF00277701 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageUIExtensions.swift; sourceTree = "<group>"; };
 		8E585A381EBDC2AD0006342E /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
 		8E84321F1EE0849200A1F892 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */,
 				8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */,
 				8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */,
+				8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				8E3921431EB1CC7900277701 /* Zone.swift in Sources */,
 				8E3921641EB203C100277701 /* ApplicationData.swift in Sources */,
 				8ED7E8211EB1BCED00F13023 /* MapViewController.swift in Sources */,
+				8E5189201F47559400DBA892 /* MessageUIExtensions.swift in Sources */,
 				8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */,
 				8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */,
 				8E2D42B41EB269D400F286CF /* UIKitExtensions.swift in Sources */,
