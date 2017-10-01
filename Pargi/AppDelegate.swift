@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationData.updateDatabase()
         
         // Some general appearance nonsense        
-        let attributes: [String: Any] = [NSForegroundColorAttributeName: #colorLiteral(red: 0.1098039216, green: 0.1960784314, blue: 0.2666666667, alpha: 1), NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17.0)]
+        let attributes: [NSAttributedStringKey: Any] = [.foregroundColor: #colorLiteral(red: 0.1098039216, green: 0.1960784314, blue: 0.2666666667, alpha: 1), .font: UIFont.boldSystemFont(ofSize: 17.0)]
         UINavigationBar.appearance().titleTextAttributes = attributes
         
         // Location updates

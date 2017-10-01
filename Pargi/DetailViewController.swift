@@ -126,15 +126,15 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
     // MARK: UI Updates
     
     private func updateParkButton() {
-        let font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightHeavy)
+        let font = UIFont.systemFont(ofSize: 14.0, weight: .heavy)
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
         
-        var attributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraph, NSForegroundColorAttributeName: self.parkButton.tintColor]
+        var attributes: [NSAttributedStringKey: Any] = [.font: font, .paragraphStyle: paragraph, .foregroundColor: self.parkButton.tintColor]
         let buttonTitle = NSMutableAttributedString(string: "UI.CTA.Park".localized(withComment: "Call to action: Park"), attributes: attributes)
         
         if let license = self.licensePlateNumber {
-            attributes[NSFontAttributeName] = UIFont.systemFont(ofSize: 10.0, weight: UIFontWeightRegular)
+            attributes[NSAttributedStringKey.font] = UIFont.systemFont(ofSize: 10.0, weight: .regular)
             let licenseTitle = NSAttributedString(string: "\n\(license)", attributes: attributes)
             buttonTitle.append(licenseTitle)
         }
@@ -142,10 +142,10 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         self.parkButton?.titleLabel?.numberOfLines = 0
         self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
         
-        buttonTitle.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
+        buttonTitle.addAttributes([.foregroundColor: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
         self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .highlighted)
         
-        buttonTitle.addAttributes([NSForegroundColorAttributeName: self.parkButton?.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
+        buttonTitle.addAttributes([.foregroundColor: self.parkButton?.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
         self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
         
         // Should only be tappable if there is a zone and a license

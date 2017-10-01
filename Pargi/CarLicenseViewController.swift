@@ -52,7 +52,7 @@ class CarLicenseViewController: UIViewController {
             let button = UIButton(type: .system)
             button.setTitle(number, for: .normal)
             button.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 30.0, bottom: 0.0, right: 30.0)
-            button.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal)
+            button.setContentCompressionResistancePriority(.required, for: .horizontal)
             button.addTarget(self, action: #selector(shortcutLicensePlateTapped(sender:)), for: .touchUpInside)
             
             self.shortcutLicensePlatesStackView?.addArrangedSubview(button)

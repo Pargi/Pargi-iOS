@@ -39,7 +39,7 @@ class AnnotationView: MKAnnotationView {
     // MARK: Helpers
     
     private func titleTextFont() -> UIFont {
-        return UIFont.systemFont(ofSize: 10.0, weight: UIFontWeightHeavy)
+        return UIFont.systemFont(ofSize: 10.0, weight: .heavy)
     }
     
     private func textBoundingRect() -> CGRect {
@@ -47,9 +47,9 @@ class AnnotationView: MKAnnotationView {
         
         if let title = self.annotation?.title as? String {
             let attributedTitle = NSAttributedString(string: title, attributes: [
-                NSFontAttributeName: self.titleTextFont(),
-                NSStrokeWidthAttributeName: -20.0,
-                NSKernAttributeName: self.contentScaleFactor * 0.2])
+                .font: self.titleTextFont(),
+                .strokeWidth: -20.0,
+                .kern: self.contentScaleFactor * 0.2])
             
             frame = CGRect(origin: .zero, size: attributedTitle.size())
             frame.size.height += 4.0
@@ -87,11 +87,11 @@ class AnnotationView: MKAnnotationView {
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .center
 
-        var attributes: [String: Any] = [
-            NSFontAttributeName: self.titleTextFont(),
-            NSForegroundColorAttributeName: UIColor.white,
-            NSKernAttributeName: self.contentScaleFactor * 0.2,
-            NSParagraphStyleAttributeName: titleParagraphStyle
+        var attributes: [NSAttributedStringKey: Any] = [
+            .font: self.titleTextFont(),
+            .foregroundColor: UIColor.white,
+            .kern: self.contentScaleFactor * 0.2,
+            .paragraphStyle: titleParagraphStyle
         ]
         
         // Draw icon
@@ -116,7 +116,7 @@ class AnnotationView: MKAnnotationView {
         title.draw(in: textRect.offsetBy(dx: 0.0, dy: 0.3), withAttributes: attributes)
         
         ctx?.setTextDrawingMode(.fill)
-        attributes[NSForegroundColorAttributeName] = self.tintColor
+        attributes[.foregroundColor] = self.tintColor
         title.draw(in: textRect, withAttributes: attributes)
     }
 }

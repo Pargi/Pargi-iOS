@@ -43,10 +43,10 @@ class InfoViewController: UIViewController, UITextViewDelegate {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
 
-        let attributes: [String: Any] = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightRegular),
-            NSParagraphStyleAttributeName: paragraph,
-            NSForegroundColorAttributeName: UIColor(hex: "1C3244")
+        let attributes: [NSAttributedStringKey: Any] = [
+            .font: UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.regular),
+            .paragraphStyle: paragraph,
+            .foregroundColor: UIColor(hex: "1C3244")
         ]
         ackText.addAttributes(attributes, range: NSRange(location: 0, length: ackText.length))
         

@@ -51,9 +51,11 @@ extension String {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.25
         
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightMedium),
-                          NSForegroundColorAttributeName: UIColor(hex: "1C3244"),
-                          NSParagraphStyleAttributeName: paragraph]
+        let attributes: [NSAttributedStringKey: Any] = [
+            .font: UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.medium),
+            .foregroundColor: UIColor(hex: "1C3244"),
+            .paragraphStyle: paragraph
+        ]
         
         return NSAttributedString(string: self, attributes: attributes)
     }
@@ -65,7 +67,7 @@ extension NSAttributedString {
             return nil
         }
         
-        guard let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) else {
+        guard let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else {
             return nil
         }
         
