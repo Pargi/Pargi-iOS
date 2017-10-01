@@ -32,6 +32,7 @@
 		8E5189201F47559400DBA892 /* MessageUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */; };
 		8E585A391EBDC2AD0006342E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E585A381EBDC2AD0006342E /* InfoViewController.swift */; };
 		8E8432201EE0849200A1F892 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84321F1EE0849200A1F892 /* UserData.swift */; };
+		8E8746881F80E4B600A0B0CB /* ParkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */; };
 		8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */; };
 		8EA9E0F61EB4AFCC007D1BA7 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */; };
 		8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */; };
@@ -102,6 +103,8 @@
 		8E585A381EBDC2AD0006342E /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
 		8E84321F1EE0849200A1F892 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkedViewController.swift; sourceTree = "<group>"; };
+		8E87468C1F81016100A0B0CB /* Tallinn.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tallinn.gpx; sourceTree = "<group>"; };
 		8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarLicenseViewController.swift; sourceTree = "<group>"; };
 		8E8904E01EBF5E690049EF7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		8EA9E0F51EB4AFCC007D1BA7 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -221,6 +224,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8E87468B1F81016100A0B0CB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8E87468C1F81016100A0B0CB /* Tallinn.gpx */,
+			);
+			path = Assets;
+			sourceTree = SOURCE_ROOT;
+		};
 		8ED7E8121EB1BCED00F13023 = {
 			isa = PBXGroup;
 			children = (
@@ -252,11 +263,13 @@
 				8E585A381EBDC2AD0006342E /* InfoViewController.swift */,
 				8EED90151EE18F3900240A20 /* SearchViewController.swift */,
 				8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */,
+				8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */,
 				8ED7E8221EB1BCED00F13023 /* Main.storyboard */,
 				8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */,
 				8ED7E8251EB1BCED00F13023 /* Assets.xcassets */,
 				8ED7E8271EB1BCED00F13023 /* LaunchScreen.storyboard */,
 				8ED7E82A1EB1BCED00F13023 /* Info.plist */,
+				8E87468B1F81016100A0B0CB /* Assets */,
 				8E2D42B01EB2502E00F286CF /* UI */,
 				8E3921621EB203B200277701 /* Data */,
 				8E3921371EB1C0DF00277701 /* Model */,
@@ -429,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E8746881F80E4B600A0B0CB /* ParkedViewController.swift in Sources */,
 				8E3921411EB1CADA00277701 /* Provider.swift in Sources */,
 				8EA9E0F61EB4AFCC007D1BA7 /* RoundedButton.swift in Sources */,
 				8E2D42AF1EB24F7200F286CF /* MainViewController.swift in Sources */,
@@ -646,6 +660,8 @@
 				INFOPLIST_FILE = Pargi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D ENABLE_SEARCH";
+				"OTHER_SWIFT_FLAGS[sdk=iphonesimulator*]" = "-D IOS_SIMULATOR -D ENABLE_SEARCH";
 				PRODUCT_BUNDLE_IDENTIFIER = bloop.hnormak.pargi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a0c5453c-de64-4d1a-a94d-30ffc9702b16";

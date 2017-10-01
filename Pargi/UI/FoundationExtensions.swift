@@ -28,3 +28,11 @@ extension Array {
         self = shift(withDistance: distance)
     }
 }
+
+extension URL {
+    static var endParkingPhoneNumber: URL {
+        get {
+            return URL(string: "tel://1903")!
+        }
+    }
+}

@@ -80,29 +80,14 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
     // (limit will be enforced by not displaying more than we have buttons available)
     var zones: [Zone] = [] {
         didSet {
-            // Update up-to n buttons (as many as we have in the stack view)
-            for (idx, view) in self.zoneStackView.arrangedSubviews.enumerated() {
-                guard let btn = view as? UIButton else {
-                    continue
-                }
-                
-                if self.zones.count <= idx {
-                    btn.isHidden = true
-                    continue
-                }
-                
-                let zone = self.zones[idx]
-                let provider = ApplicationData.currentDatabase.provider(for: zone)
-                btn.backgroundColor = provider?.color
-                btn.setTitle(zone.code, for: .normal)
-                btn.isHidden = false
+            self.updateZoneButtons()
+            
+            // Default selected zone to the first of the new zones (if current selection is not present)
+            if let currentSelectedZone = self.selectedZone, self.zones.index(of: currentSelectedZone) == nil {
+                self.selectedZone = self.zones.first
+            } else if self.selectedZone == nil {
+                self.selectedZone = self.zones.first
             }
-            
-            // Default selected zone to the first of the new zones
-            self.selectedZone = self.zones.first
-            
-            // If no zones, then unhide the missing zones label
-            self.zeroZonesLabel.isHidden = self.zones.count > 0
         }
     }
     
@@ -119,37 +104,44 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
         
         // Update park button
         self.updateParkButton()
-        self.parkButton.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: false), for: .normal)
-        self.parkButton.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: true), for: .highlighted)
+        
+        // Update zone buttons
+        self.updateZoneButtons()
     }
     
     // MARK: UI Updates
     
     private func updateParkButton() {
-        let font = UIFont.systemFont(ofSize: 14.0, weight: .heavy)
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
+        let action = "UI.CTA.Park".localized(withComment: "Call to action: Park")
+        let detail = self.licensePlateNumber
         
-        var attributes: [NSAttributedStringKey: Any] = [.font: font, .paragraphStyle: paragraph, .foregroundColor: self.parkButton.tintColor]
-        let buttonTitle = NSMutableAttributedString(string: "UI.CTA.Park".localized(withComment: "Call to action: Park"), attributes: attributes)
-        
-        if let license = self.licensePlateNumber {
-            attributes[NSAttributedStringKey.font] = UIFont.systemFont(ofSize: 10.0, weight: .regular)
-            let licenseTitle = NSAttributedString(string: "\n\(license)", attributes: attributes)
-            buttonTitle.append(licenseTitle)
-        }
-        
-        self.parkButton?.titleLabel?.numberOfLines = 0
-        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
-        
-        buttonTitle.addAttributes([.foregroundColor: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
-        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .highlighted)
-        
-        buttonTitle.addAttributes([.foregroundColor: self.parkButton?.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
-        self.parkButton?.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
+        self.parkButton?.update(withCallToAction: action, andDetail: detail)
         
         // Should only be tappable if there is a zone and a license
         self.parkButton.isEnabled = self.selectedZone != nil && self.licensePlateNumber != nil
+    }
+    
+    private func updateZoneButtons() {
+        // Update up-to n buttons (as many as we have in the stack view)
+        for (idx, view) in self.zoneStackView.arrangedSubviews.enumerated() {
+            guard let btn = view as? UIButton else {
+                continue
+            }
+            
+            if self.zones.count <= idx {
+                btn.isHidden = true
+                continue
+            }
+            
+            let zone = self.zones[idx]
+            let provider = ApplicationData.currentDatabase.provider(for: zone)
+            btn.backgroundColor = provider?.color
+            btn.setTitle(zone.code, for: .normal)
+            btn.isHidden = false
+        }
+        
+        // If no zones, then unhide the missing zones label
+        self.zeroZonesLabel.isHidden = self.zones.count > 0
     }
     
     // MARK: Actions
@@ -186,12 +178,12 @@ class DetailViewController: UIViewController, PulleyDrawerViewControllerDelegate
     
     // MARK: PulleyDrawerViewControllerDelegate
     
-    func collapsedDrawerHeight() -> CGFloat {
-        return 75.0
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 80.0 + bottomSafeArea
     }
     
-    func partialRevealDrawerHeight() -> CGFloat {
-        return 300.0
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 310.0 + bottomSafeArea
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {

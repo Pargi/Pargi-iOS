@@ -9,6 +9,57 @@
 import Foundation
 import UIKit
 
+extension UIButton {
+    func update(withCallToAction cta: String, andDetail detail: String? = nil) {
+        // Background
+        self.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: false), for: .normal)
+        self.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: true), for: .highlighted)
+        
+        // Text
+        let font = UIFont.systemFont(ofSize: 14.0, weight: .heavy)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        var attributes: [NSAttributedStringKey: Any] = [.font: font, .paragraphStyle: paragraph, .foregroundColor: self.tintColor]
+        let buttonTitle = NSMutableAttributedString(string: cta, attributes: attributes)
+        
+        if let detail = detail {
+            attributes[NSAttributedStringKey.font] = UIFont.systemFont(ofSize: 10.0, weight: .regular)
+            let detailTitle = NSAttributedString(string: "\n\(detail)", attributes: attributes)
+            buttonTitle.append(detailTitle)
+        }
+        
+        self.titleLabel?.numberOfLines = 0
+        self.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
+        
+        buttonTitle.addAttributes([.foregroundColor: UIColor.white], range: NSRange(location: 0, length: buttonTitle.length))
+        self.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .highlighted)
+        
+        buttonTitle.addAttributes([.foregroundColor: self.tintColor.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
+        self.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
+    }
+    
+    func update(withSecondaryCallToAction cta: String) {
+        // Background
+        self.setBackgroundImage(UIImage.roundedImage(cornerRadius: 8.0, lineWidth: 2.0, fill: true), for: .normal)
+        self.adjustsImageWhenHighlighted = true
+        
+        // Text
+        let font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
+        let attributes: [NSAttributedStringKey: Any] = [.font: font, .paragraphStyle: paragraph, .foregroundColor: UIColor.white]
+        let buttonTitle = NSMutableAttributedString(string: cta, attributes: attributes)
+        
+        self.titleLabel?.numberOfLines = 1
+        self.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .normal)
+        
+        buttonTitle.addAttributes([.foregroundColor: UIColor.white.withAlphaComponent(0.6) as Any], range: NSRange(location: 0, length: buttonTitle.length))
+        self.setAttributedTitle(buttonTitle.copy() as? NSAttributedString, for: .disabled)
+    }
+}
+
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)

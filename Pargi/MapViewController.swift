@@ -10,12 +10,29 @@ import UIKit
 import MapKit
 import Pulley
 
-class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryContentControllerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, PulleyPrimaryContentControllerDelegate {
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapPanGesture: UIPanGestureRecognizer!
     
     private let mapMaxAltitude: CLLocationDistance = 500.0
+    private var previousBottomDistance: CGFloat = 0.0
     
     var trackUserLocation: Bool = true
+    var currentUserLocation: CLLocation? {
+        get {
+            return self.mapView.userLocation.location
+        }
+    }
+    
+    var isUserInteractionEnabled: Bool {
+        get {
+            return self.mapView.isUserInteractionEnabled
+        }
+        
+        set {
+            self.mapView.isUserInteractionEnabled = newValue
+        }
+    }
     
     var delegate: MapViewControllerDelegate? = nil
     
@@ -35,30 +52,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
         }
     }
     
-    // MARK: MKMapViewDelegate
+    var visibleZones: [Zone] = []
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated: Bool) {
-        // Make sure our parent (if Pulley), is collapsed
-        if let pulley = self.parent as? PulleyViewController, pulley.drawerPosition != .collapsed {
-            pulley.setDrawerPosition(position: .collapsed)
+    // MARK: Actions
+    
+    @IBAction func mapPanned(gesture: UIPanGestureRecognizer) {
+        guard gesture.state == .ended else {
+            return
         }
+        
+        // Panning has finished, update our visible zones listing
+        self.updateVisibleZones()
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    // MARK: Handlers
+    
+    fileprivate func updateVisibleZones() {
         // Figure out which zones are now visible
-        let visibleMapRect = mapView.visibleMapRect
-        let paddedMapRect = mapView.mapRectThatFits(visibleMapRect, edgePadding: UIEdgeInsets(top: 50.0, left: 50.0, bottom: 50.0, right: 50.0))
+        let visibleMapRect = self.mapView.visibleMapRect
+        let paddedMapRect = self.mapView.mapRectThatFits(visibleMapRect, edgePadding: .zero)
         
-        let annotations = mapView.annotations(in: paddedMapRect)
-        let overlays = mapView.overlays.filter({ overlay in
+        let annotations = self.mapView.annotations(in: paddedMapRect)
+        let overlays = self.mapView.overlays.filter({ overlay in
             return MKMapRectIntersectsRect(overlay.boundingMapRect, paddedMapRect)
         })
-                
+        
         let zones = annotations.flatMap({ ($0 as? Annotation)?.zone }) + overlays.flatMap({ ($0 as? Annotation)?.zone })
         let uniqueZones = zones.reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
         
         // Sort the zones based on distance from the center (unless we are inside of them, in which case the distance is equivalent to 0)
-        let coordinate = mapView.userLocation.coordinate
+        let coordinate = self.mapView.userLocation.coordinate
         let sorted = uniqueZones.sorted { (a, b) -> Bool in
             guard a.isPoint && b.isPoint else {
                 return a.contains(coordinate: coordinate) && !b.contains(coordinate: coordinate)
@@ -67,15 +90,46 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
             return a.distance(from: coordinate) < b.distance(from: coordinate)
         }
         
+        self.visibleZones = sorted
         self.delegate?.mapViewController(self, didUpdateVisibleZones: sorted)
     }
-
+    
+    // MARK: UIGestureRecognizerDelegate
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    // MARK: PulleyPrimaryContentControllerDelegate
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
+        // Update our "visible area" on the map
+        let delta = (distance + bottomSafeArea - self.previousBottomDistance) / 2
+        
+        // Determine the center point of the new visible area
+        let newCenter = CGPoint(x: self.mapView.frame.midX, y: self.mapView.frame.midY + delta)
+        let coordinate = self.mapView.convert(newCenter, toCoordinateFrom: self.mapView.superview)
+        
+        let existingCamera = self.mapView.camera
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: existingCamera.altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
+        self.mapView.setCamera(camera, animated: false)
+        
+        self.previousBottomDistance = distance + bottomSafeArea
+    }
+    
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
+        // Update our visible zones
+        self.updateVisibleZones()
+    }
+    
+    // MARK: MKMapViewDelegate
+    
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         // Ignore if we are not to follow user
         guard self.trackUserLocation else {
             return
         }
-        
+                
         // Update camera (if altitude is higher than expected)
         let existingCamera = mapView.camera
         let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
@@ -88,7 +142,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, PulleyPrimaryConte
         }
         
         let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
-        mapView.setCamera(camera, animated: true)
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+            self.mapView.camera = camera
+        }) { success in
+            self.updateVisibleZones()
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

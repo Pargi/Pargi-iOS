@@ -1,11 +1,18 @@
 "OK" = "OK";
 
 "UI.CTA.Park" = "Pargi";
+"UI.CTA.Drive" = "Sõida";
+"UI.CTA.Directions" = "Juhised";
+
 "UI.NoZonesFound" = "Tsoone ei leitud";
 "UI.NoPriceInfo" = "Hinnainfo puudub";
 
 "UI.NoSMSCapability" = "SMSi saatmine ebaõnnestus";
 "UI.SMSFailed" = "SMSi saatmine ebaõnnestus";
+"UI.ParkingFailedNoZone" = "Parkimine ebaõnnestus, tundmatu tsoon";
+
+"UI.Parked.Info.DurationPrefix" = "Kestus: ";
+"UI.Parked.Info.CostPrefix" = "Eeldatav maksumus: ";
 
 "UI.About.Version" = "Versioon";
 "UI.About.DatabaseVersion" = "Andmebaasi versioon";

@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import CoreLocation
 import Cereal
 
 struct UserData {
@@ -19,6 +20,7 @@ struct UserData {
     var isParked: Bool = false
     var parkedAt: Date? = nil
     var currentParkedZone: Zone? = nil
+    var currentParkedCoordinate: CLLocationCoordinate2D? = nil
     
     private static let userDataURL: URL = {
         let base = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -49,7 +51,7 @@ struct UserData {
                 return nil
             }()
             
-            return UserData(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone)
+            return UserData(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone, currentParkedCoordinate: nil)
         }
     }() {
         didSet {
@@ -60,6 +62,22 @@ struct UserData {
                 }
             }
         }
+    }
+    
+    // Convenience
+    
+    mutating func startParking(withZone zone: Zone, andCoordinate coordinate: CLLocationCoordinate2D? = nil) {
+        self.isParked = true
+        self.currentParkedZone = zone
+        self.currentParkedCoordinate = coordinate
+        self.parkedAt = Date()
+    }
+    
+    mutating func endParking() {
+        self.isParked = false
+        self.currentParkedZone = nil
+        self.currentParkedCoordinate = nil
+        self.parkedAt = nil
     }
     
     // MARK: Background write
@@ -74,6 +92,7 @@ extension UserData: CerealType {
         static let isParked = "isParked"
         static let parkedAt = "parkedAt"
         static let currentParkedZone = "currentParkedZone"
+        static let currentParkedCoordinate = "currentParkedCoordinate"
     }
     
     init(decoder: Cereal.CerealDecoder) throws {
@@ -82,8 +101,9 @@ extension UserData: CerealType {
         let isParked: Bool = try decoder.decode(key: Keys.isParked)!
         let parkedAt: Date? = try decoder.decode(key: Keys.parkedAt)
         let currentParkedZone: Zone? = try decoder.decodeCereal(key: Keys.currentParkedZone)
+        let currentParkedCoordinate: CLLocationCoordinate2D? = try decoder.decodeCereal(key: Keys.currentParkedCoordinate)
         
-        self.init(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone)
+        self.init(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone, currentParkedCoordinate: currentParkedCoordinate)
     }
     
     func encodeWithCereal(_ encoder: inout Cereal.CerealEncoder) throws {
@@ -92,5 +112,26 @@ extension UserData: CerealType {
         try encoder.encode(self.isParked, forKey: Keys.isParked)
         try encoder.encode(self.parkedAt, forKey: Keys.parkedAt)
         try encoder.encode(self.currentParkedZone, forKey: Keys.currentParkedZone)
+        try encoder.encode(self.currentParkedCoordinate, forKey: Keys.currentParkedCoordinate)
+    }
+}
+
+// Add Cereal support to CLLocationCoordinate2D
+extension CLLocationCoordinate2D: CerealType {
+    private struct Keys {
+        static let latitude = "latitude"
+        static let longitude = "longitude"
+    }
+    
+    public init(decoder: CerealDecoder) throws {
+        let latitude: CLLocationDegrees = try decoder.decode(key: Keys.latitude)!
+        let longitude: CLLocationDegrees = try decoder.decode(key: Keys.longitude)!
+        
+        self.init(latitude: latitude, longitude: longitude)
+    }
+    
+    public func encodeWithCereal(_ encoder: inout CerealEncoder) throws {
+        try encoder.encode(self.latitude, forKey: Keys.latitude)
+        try encoder.encode(self.longitude, forKey: Keys.longitude)
     }
 }
