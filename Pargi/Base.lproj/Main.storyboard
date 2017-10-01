@@ -960,4 +960,5 @@
         <image name="Edit" width="14" height="14"/>
         <image name="Pargi-Symbol" width="110" height="131"/>
     </resources>
+    <color key="tintColor" red="0.10980392160000001" green="0.1960784314" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
 </document>
