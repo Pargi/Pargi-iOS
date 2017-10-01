@@ -19,9 +19,6 @@ import MapKit
 class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate, ParkedViewControllerDelegate, MFMessageComposeViewControllerDelegate {
     private var selectedZone: Zone? = nil
     
-    // Search button
-    @IBOutlet var searchButton: UIBarButtonItem!
-    
     // Observing state to figure out whether call was placed
     private var callObserver: CXCallObserver? = nil
     
@@ -107,7 +104,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         
         // Hide search button unless specified by env
         #if !ENABLE_SEARCH
-            self.searchButton.hidden = true
+            self.navigationItem.leftBarButtonItem = nil
         #endif
     }
     
