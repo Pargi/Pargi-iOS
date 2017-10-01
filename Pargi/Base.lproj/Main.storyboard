@@ -77,7 +77,6 @@
                     <connections>
                         <outlet property="drawerContentContainerView" destination="XBL-jG-JGB" id="ApT-mv-9Vw"/>
                         <outlet property="primaryContentContainerView" destination="odr-6Q-jam" id="lh0-w4-WXp"/>
-                        <outlet property="searchButton" destination="2dH-Tc-nN4" id="6Ur-Rd-4W6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y82-Lu-QVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -373,7 +372,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-jo-AQL">
                                         <rect key="frame" x="0.0" y="0.0" width="289" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-78-ihi" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-78-ihi" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="44"/>
                                                 <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
@@ -390,7 +389,7 @@
                                                     <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="78T-5U-b3N"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-Tw-tY7" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-Tw-tY7" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
                                                 <rect key="frame" x="81" y="0.0" width="41" height="44"/>
                                                 <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
@@ -407,7 +406,7 @@
                                                     <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="yYO-O4-DFg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-GD-uIo" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-GD-uIo" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
                                                 <rect key="frame" x="128" y="0.0" width="40" height="44"/>
                                                 <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
@@ -424,7 +423,7 @@
                                                     <action selector="tappedWithZoneButton:" destination="h6D-91-X7R" eventType="touchUpInside" id="Wuc-EY-6qV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-yY-4Pe" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8S-yY-4Pe" customClass="RoundedButton" customModule="Pargi" customModuleProvider="target">
                                                 <rect key="frame" x="174" y="0.0" width="57" height="44"/>
                                                 <color key="backgroundColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
