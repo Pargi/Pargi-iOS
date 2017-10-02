@@ -65,7 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         self.updateVisibleZones()
     }
     
-    // MARK: Handlers
+    // MARK: Helpers
     
     fileprivate func updateVisibleZones() {
         // Figure out which zones are now visible
@@ -92,6 +92,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         
         self.visibleZones = sorted
         self.delegate?.mapViewController(self, didUpdateVisibleZones: sorted)
+    }
+    
+    fileprivate func uncoveredMapFrame() -> CGRect {
+        guard let pulley = self.parent as? PulleyViewController, let drawer = pulley.drawerContentViewController else {
+            return self.mapView.frame
+        }
+        
+        let drawerRect = self.view.convert(drawer.view.frame, from: drawer.view.superview)
+        let mapViewRect = self.view.convert(self.mapView.frame, from: self.mapView.superview)
+        
+        guard mapViewRect.maxY > drawerRect.minY else {
+            return self.mapView.frame
+        }
+        
+        return CGRect(origin: mapViewRect.origin, size: CGSize(width: mapViewRect.width, height: drawerRect.minY - mapViewRect.minY))
     }
     
     // MARK: UIGestureRecognizerDelegate
@@ -129,20 +144,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         guard self.trackUserLocation else {
             return
         }
-                
+        
+        // Determine visual offset of the center coordinate
+        let mapFrame = self.mapView.frame
+        let uncoveredFrame = self.uncoveredMapFrame()
+        let offset = mapFrame.midY - uncoveredFrame.midY
+        
         // Update camera (if altitude is higher than expected)
         let existingCamera = mapView.camera
         let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
+        let coordinate = userLocation.coordinate
         
-        let coordinate: CLLocationCoordinate2D
-        if mapView.isUserLocationVisible && existingCamera.altitude == altitude {
-            coordinate = existingCamera.centerCoordinate
-        } else {
-            coordinate = userLocation.coordinate
-        }
+        // Correct the coordinate for visual offset (caused by the drawer)
+        var point = self.mapView.convert(coordinate, toPointTo: self.view)
+        point.y += offset
+        let offsetCoordinate = self.mapView.convert(point, toCoordinateFrom: self.view)
         
-        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
-        
+        // Change the camera
+        let camera = MKMapCamera(lookingAtCenter: offsetCoordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
         UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
             self.mapView.camera = camera
         }) { success in
