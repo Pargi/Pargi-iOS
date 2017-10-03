@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -310,7 +309,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIJ-34-wPP">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIJ-34-wPP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -318,16 +317,31 @@
                                     <outletCollection property="gestureRecognizers" destination="ZCk-KN-v8b" appends="YES" id="Eq4-3e-BhV"/>
                                 </connections>
                             </mapView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idg-wq-aeE">
+                                <rect key="frame" x="319" y="333" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="NSZ-JO-Zh2"/>
+                                    <constraint firstAttribute="width" constant="56" id="dHS-m7-sNx"/>
+                                </constraints>
+                                <state key="normal" image="Locate"/>
+                                <connections>
+                                    <action selector="locateUser:" destination="Vs3-z2-MvH" eventType="touchUpInside" id="bkh-4g-aFq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kIJ-34-wPP" firstAttribute="centerY" secondItem="qZu-37-IzL" secondAttribute="centerY" id="RTe-vc-0kv"/>
+                            <constraint firstItem="Idg-wq-aeE" firstAttribute="trailing" secondItem="kIJ-34-wPP" secondAttribute="trailing" id="ZKl-as-rLS"/>
                             <constraint firstItem="kIJ-34-wPP" firstAttribute="width" secondItem="qZu-37-IzL" secondAttribute="width" id="dRB-TA-B0c"/>
                             <constraint firstItem="kIJ-34-wPP" firstAttribute="height" secondItem="qZu-37-IzL" secondAttribute="height" id="go8-uc-4Gf"/>
+                            <constraint firstItem="Idg-wq-aeE" firstAttribute="bottom" secondItem="kIJ-34-wPP" secondAttribute="bottom" id="mX0-Qx-9MO" userLabel="Locate User Button Bottom Constraint"/>
                             <constraint firstItem="kIJ-34-wPP" firstAttribute="centerX" secondItem="qZu-37-IzL" secondAttribute="centerX" id="xp3-cK-A7I"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="locateUserButton" destination="Idg-wq-aeE" id="zhC-81-gtI"/>
+                        <outlet property="locateUserButtonBottomConstraint" destination="mX0-Qx-9MO" id="Nk0-Ic-4wE"/>
                         <outlet property="mapPanGesture" destination="ZCk-KN-v8b" id="ZUO-bk-jBg"/>
                         <outlet property="mapView" destination="kIJ-34-wPP" id="dji-Qq-B3g"/>
                     </connections>
@@ -959,6 +973,7 @@
     </scenes>
     <resources>
         <image name="Edit" width="14" height="14"/>
+        <image name="Locate" width="32" height="32"/>
         <image name="Pargi-Symbol" width="110" height="131"/>
     </resources>
     <color key="tintColor" red="0.10980392160000001" green="0.1960784314" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>

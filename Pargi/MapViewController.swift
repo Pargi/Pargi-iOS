@@ -13,6 +13,8 @@ import Pulley
 class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, PulleyPrimaryContentControllerDelegate {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapPanGesture: UIPanGestureRecognizer!
+    @IBOutlet var locateUserButton: UIButton!
+    @IBOutlet var locateUserButtonBottomConstraint: NSLayoutConstraint!
     
     private let mapMaxAltitude: CLLocationDistance = 500.0
     private var previousBottomDistance: CGFloat = 0.0
@@ -61,8 +63,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             return
         }
         
+        // Stop trackign user location and show button for centering
+        self.locateUserButton.isHidden = false
+        self.trackUserLocation = false
+        
         // Panning has finished, update our visible zones listing
         self.updateVisibleZones()
+    }
+    
+    @IBAction func locateUser(_ sender: UIButton) {
+        if let currentUserLocation = self.currentUserLocation {
+            self.mapView.setCenter(currentUserLocation.coordinate, animated: false)
+        }
+        self.mapView.camera.heading = 0
+        self.trackUserLocation = true
+        sender.isHidden = true
     }
     
     // MARK: Helpers
@@ -130,11 +145,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         self.mapView.setCamera(camera, animated: false)
         
         self.previousBottomDistance = distance + bottomSafeArea
+        
+        // Update user location centering button coordinates based on drawer height
+        locateUserButtonBottomConstraint.constant = -distance
     }
     
     func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         // Update our visible zones
         self.updateVisibleZones()
+        
+        // Calling this after drawer has changed, as it will break drawer opening if called in ’drawerChangedDistanceFromBottom’
+        self.view.setNeedsUpdateConstraints()
     }
     
     // MARK: MKMapViewDelegate
