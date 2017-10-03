@@ -72,10 +72,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     }
     
     @IBAction func locateUser(_ sender: UIButton) {
-        if let currentUserLocation = self.currentUserLocation {
-            self.mapView.setCenter(currentUserLocation.coordinate, animated: false)
+        guard let currentUserLocation = self.currentUserLocation else {
+            return
         }
-        self.mapView.camera.heading = 0
+        
+        let camera = self.mapView.camera
+        let center = self.visualCenterCoordinate(forCoordinate: currentUserLocation.coordinate)
+        let newCamera = MKMapCamera(lookingAtCenter: center, fromDistance: camera.altitude, pitch: camera.pitch, heading: 0)
+        self.mapView.setCamera(newCamera, animated: true)
+        
         self.trackUserLocation = true
         sender.isHidden = true
     }
@@ -124,6 +129,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return CGRect(origin: mapViewRect.origin, size: CGSize(width: mapViewRect.width, height: drawerRect.minY - mapViewRect.minY))
     }
     
+    fileprivate func visualCenterCoordinate(forCoordinate coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        // Determine visual offset of the center coordinate
+        let mapFrame = self.mapView.frame
+        let uncoveredFrame = self.uncoveredMapFrame()
+        let offset = mapFrame.midY - uncoveredFrame.midY
+        
+        // Correct the coordinate for visual offset (caused by the drawer)
+        var point = self.mapView.convert(coordinate, toPointTo: self.view)
+        point.y += offset
+        return self.mapView.convert(point, toCoordinateFrom: self.view)
+    }
+    
     // MARK: UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -166,23 +183,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             return
         }
         
-        // Determine visual offset of the center coordinate
-        let mapFrame = self.mapView.frame
-        let uncoveredFrame = self.uncoveredMapFrame()
-        let offset = mapFrame.midY - uncoveredFrame.midY
-        
         // Update camera (if altitude is higher than expected)
         let existingCamera = mapView.camera
         let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
-        let coordinate = userLocation.coordinate
-        
-        // Correct the coordinate for visual offset (caused by the drawer)
-        var point = self.mapView.convert(coordinate, toPointTo: self.view)
-        point.y += offset
-        let offsetCoordinate = self.mapView.convert(point, toCoordinateFrom: self.view)
+        let coordinate = self.visualCenterCoordinate(forCoordinate: userLocation.coordinate)
         
         // Change the camera
-        let camera = MKMapCamera(lookingAtCenter: offsetCoordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
         UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
             self.mapView.camera = camera
         }) { success in
