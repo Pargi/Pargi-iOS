@@ -79,10 +79,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let camera = self.mapView.camera
         let center = self.visualCenterCoordinate(forCoordinate: currentUserLocation.coordinate)
         let newCamera = MKMapCamera(lookingAtCenter: center, fromDistance: camera.altitude, pitch: camera.pitch, heading: 0)
-        self.mapView.setCamera(newCamera, animated: true)
-        
-        self.trackUserLocation = true
-        sender.isHidden = true
+
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+            self.mapView.camera = newCamera
+        }) { success in
+            self.updateVisibleZones()
+            self.trackUserLocation = true
+            sender.isHidden = true
+        }
     }
     
     // MARK: Helpers
