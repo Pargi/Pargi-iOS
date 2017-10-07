@@ -16,6 +16,7 @@ class ParkedViewController: UIViewController, PulleyDrawerViewControllerDelegate
     @IBOutlet var licensePlateLabel: UILabel!
     @IBOutlet var zoneNameLabel: UILabel!
     @IBOutlet var parkingInfoLabel: UILabel!
+    @IBOutlet var parkedTimeLabel: UILabel!
 
     var parkedAt: Date? = nil
     var delegate: ParkedViewControllerDelegate? = nil

@@ -199,12 +199,12 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             .foregroundColor: parkedView.parkingInfoLabel.textColor
         ]
         
-        let duration = -parkedAt.timeIntervalSinceNow
+        let duration = self.durationFormatter.string(from: -parkedAt.timeIntervalSinceNow)!
         let attributedString = NSMutableAttributedString(string: "", attributes: attributes)
         
         // Two lines (first being the actual duration)
         attributedString.append(NSAttributedString(string: "UI.Parked.Info.DurationPrefix".localized(withComment: "Parking duration label prefix"), attributes: attributes))
-        attributedString.append(NSAttributedString(string: self.durationFormatter.string(from: duration)!, attributes: boldAttributes))
+        attributedString.append(NSAttributedString(string: duration, attributes: boldAttributes))
         
         attributedString.append(NSAttributedString(string: "\n"))
         
@@ -213,6 +213,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         attributedString.append(NSAttributedString(string: self.costFormatter.string(from: cost)!, attributes: boldAttributes))
         
         parkedView.parkingInfoLabel.attributedText = attributedString
+        parkedView.parkedTimeLabel.text = duration
     }
     
     // MARK: MapViewControllerDelegate
