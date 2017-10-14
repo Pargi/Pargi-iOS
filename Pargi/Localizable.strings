@@ -14,6 +14,10 @@
 "UI.Parked.Info.DurationPrefix" = "Kestus: ";
 "UI.Parked.Info.CostPrefix" = "Eeldatav maksumus: ";
 
+"UI.Notification.Distance.Title" = "Kas unustasid parkimise lõpetada?";
+"UI.Notification.Distance.Body" = "Oled kohast, kus parkimist alustasid, liikunud eemale, kas soovid parkimist lõpetada?";
+"UI.Notification.Action.EndParking" = "Lõpeta parkimine";
+
 "UI.About.Version" = "Versioon";
 "UI.About.DatabaseVersion" = "Andmebaasi versioon";
 "UI.About.Acknowledgments.HTML" = "Pargi 😍 ja kasutab - <a href=\"https://github.com/52inc/Pulley\">Pulley</a> ja <a href=\"https://github.com/Weebly/Cereal\">Cereal</a>";

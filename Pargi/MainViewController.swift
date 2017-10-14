@@ -11,16 +11,11 @@
 
 import Foundation
 import UIKit
-import MessageUI
 import Pulley
-import CallKit
 import MapKit
 
-class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate, ParkedViewControllerDelegate, MFMessageComposeViewControllerDelegate {
+class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate, ParkedViewControllerDelegate {
     private var selectedZone: Zone? = nil
-    
-    // Observing state to figure out whether call was placed
-    private var callObserver: CXCallObserver? = nil
     
     enum ParkedState {
         case driving
@@ -28,7 +23,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
     }
     
     // Updating parking info
-    lazy fileprivate var timer: Timer = Timer(timeInterval: 30.0, target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+    var timer: Timer?
     fileprivate let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day, .hour, .minute]
@@ -87,7 +82,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             self.handleDrawerContentsChanged()
             
             self.mapViewController?.isUserInteractionEnabled = state == .driving
-            self.timer.fire()
+            self.timer?.fire()
         }
     }
     
@@ -106,11 +101,30 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         #if !ENABLE_SEARCH
             self.navigationItem.leftBarButtonItem = nil
         #endif
+        
+        // Observe changes to the shared user data
+        NotificationCenter.default.addObserver(forName: UserData.UpdatedNotification, object: nil, queue: nil) { [weak self] (notification) in
+            // Update our parked state (which will take care of the rest)
+            self?.state = UserData.shared.isParked ? .parked : .driving
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Initial state is based on user data
         self.state = UserData.shared.isParked ? .parked : .driving
+        
+        // Update our UI
+        self.timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+        self.timer?.fire()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
     // MARK: Segues
@@ -128,34 +142,6 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
     }
     
     // MARK: Handling changes
-    
-    fileprivate func handleSMSSent(withResult result: MessageComposeResult) {
-        switch result {
-        case .sent:
-            guard let zone = self.selectedZone else {
-                // Should never occur, however, to be safe
-                let alert = UIAlertController(title: "UI.ParkingFailedNoZone".localized(withComment: "Tundmatu tsoon"), message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK".localized(withComment: "OK"), style: .default))
-                self.present(alert, animated: true, completion: nil)
-                
-                return
-            }
-            
-            // Kick off parking tracking
-            UserData.shared.startParking(withZone: zone, andCoordinate: self.mapViewController?.currentUserLocation?.coordinate)
-            
-            // Change state to parked
-            self.state = .parked
-        case .failed:
-            // Failed, we should show an error
-            // Show an alert, we can't send SMS
-            let alert = UIAlertController(title: "UI.SMSFailed".localized(withComment: "SMSi saatmine ebaõnnestus"), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK".localized(withComment: "OK"), style: .default))
-            self.present(alert, animated: true, completion: nil)
-        case .cancelled:
-            break
-        }
-    }
     
     fileprivate func handleDrawerContentsChanged() {
         if let detailView = self.detailViewController {
@@ -225,8 +211,15 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         
         let bestMatches = Array(zones[0..<min(zones.count, 3)])
         
+        if let zone = self.selectedZone, !bestMatches.contains(zone) {
+            self.selectedZone = bestMatches.first
+        } else if self.selectedZone == nil {
+            self.selectedZone = bestMatches.first
+        }
+        
         if let detailView = self.drawerContentViewController as? DetailViewController {
             detailView.zones = bestMatches
+            detailView.selectedZone = self.selectedZone
         }
     }
     
@@ -262,22 +255,15 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             return
         }
         
-        #if IOS_SIMULATOR
-            // Simulate a successful SMS sent
-            self.handleSMSSent(withResult: .sent)
-        #else
-            guard MFMessageComposeViewController.canSendText() else {
+        ParkingManager.shared.startParking(licensePlate: licensePlate, zone: zone, coordinate: self.mapViewController?.currentUserLocation?.coordinate, using: self) { (result) in
+            if result == .failed {
+                // Failed, we should show an error
                 // Show an alert, we can't send SMS
-                let alert = UIAlertController(title: "UI.NoSMSCapability".localized(withComment: "SMSi saatmine ebaõnnestus"), message: nil, preferredStyle: .alert)
+                let alert = UIAlertController(title: "UI.SMSFailed".localized(withComment: "SMSi saatmine ebaõnnestus"), message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK".localized(withComment: "OK"), style: .default))
                 self.present(alert, animated: true, completion: nil)
-                return
             }
-            
-            let composeController = MFMessageComposeViewController(licensePlate: licensePlate, zone: zone)
-            composeController.messageComposeDelegate = self
-            self.present(composeController, animated: true, completion: nil)
-        #endif
+        }
     }
     
     // MARK: ParkedViewControllerDelegate
@@ -287,20 +273,7 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             return
         }
         
-        #if IOS_SIMULATOR
-            // Immediately end parking
-            self.state = .driving
-            UserData.shared.endParking()
-        #else
-            // Start observing calls for an indication that the call was actually placed
-            // TODO: This doesn't handle the case where user presses cancel and then places a separate outgoing
-            // phone call, in which case we'd consider the parking ended - this is an edge case not worthy of immediate work
-            let observer = CXCallObserver()
-            observer.setDelegate(self, queue: nil)
-            self.callObserver = observer
-            
-            UIApplication.shared.open(URL.endParkingPhoneNumber, options: [:], completionHandler: nil)
-        #endif
+        ParkingManager.shared.endParking()
     }
     
     func parkedViewControllerDidRequestDirections(_ controller: ParkedViewController) {
@@ -317,33 +290,5 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
         mapItem.name = zone.code
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
     }
-    
-    // MARK: MFMessageComposeViewControllerDelegate
-    
-    public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {        
-        // Dismiss the composer
-        self.presentedViewController?.dismiss(animated: true, completion: nil)
-        self.handleSMSSent(withResult: result)
-    }
 }
 
-extension MainViewController: CXCallObserverDelegate {
-    public func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
-        guard let state = self.state, state == .parked else {
-            return
-        }
-        
-        // We only care about outgoing calls and ones that have connected (i.e are not dialing)
-        guard call.isOutgoing, call.hasConnected else {
-            return
-        }
-        
-        // Assume this call was the one we wanted to trigger, and transition state)
-        self.state = .driving
-        UserData.shared.endParking()
-        
-        // Cleanup
-        self.callObserver?.setDelegate(nil, queue: nil)
-        self.callObserver = nil
-    }
-}

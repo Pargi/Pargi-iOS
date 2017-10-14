@@ -14,6 +14,13 @@ import CoreLocation
 import Cereal
 
 struct UserData {
+    // Notification, fired when a change is made to the shared user data
+    // object of the notification is the (now updated) shared user data
+    static let UpdatedNotification = Notification.Name("UserDataUpdatedNotification")
+    
+    // User info key for the UpdatedNotification containing the previous UserData value
+    static let OldUserDataKey = "OldUserDataKey"
+
     var licensePlateNumber: String?
     var otherLicensePlateNumbers: [String]
     
@@ -61,6 +68,9 @@ struct UserData {
                     try? data.write(to: self.userDataURL)
                 }
             }
+            
+            // Fire off a notification
+            NotificationCenter.default.post(name: UserData.UpdatedNotification, object: self.shared, userInfo: [UserData.OldUserDataKey: oldValue])
         }
     }
     

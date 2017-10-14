@@ -38,6 +38,7 @@
 		8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */; };
 		8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */; };
 		8EA9E0FD1EB5FD4E007D1BA7 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */; };
+		8EBC19901F88E02400115439 /* ParkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBC198F1F88E02400115439 /* ParkingManager.swift */; };
 		8ED7E81F1EB1BCED00F13023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */; };
 		8ED7E8211EB1BCED00F13023 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7E8201EB1BCED00F13023 /* MapViewController.swift */; };
 		8ED7E8241EB1BCED00F13023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ED7E8221EB1BCED00F13023 /* Main.storyboard */; };
@@ -111,6 +112,7 @@
 		8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8EA9E0FA1EB4C43D007D1BA7 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		8EA9E0FC1EB5FD4E007D1BA7 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
+		8EBC198F1F88E02400115439 /* ParkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingManager.swift; sourceTree = "<group>"; };
 		8ED7E81B1EB1BCED00F13023 /* Pargi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pargi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED7E81E1EB1BCED00F13023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ED7E8201EB1BCED00F13023 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				8EED90151EE18F3900240A20 /* SearchViewController.swift */,
 				8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */,
 				8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */,
+				8EBC198F1F88E02400115439 /* ParkingManager.swift */,
 				8ED7E8221EB1BCED00F13023 /* Main.storyboard */,
 				8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */,
 				8ED7E8251EB1BCED00F13023 /* Assets.xcassets */,
@@ -448,6 +451,7 @@
 				8E2D42AF1EB24F7200F286CF /* MainViewController.swift in Sources */,
 				8E3921681EB227CF00277701 /* Networking.swift in Sources */,
 				8E585A391EBDC2AD0006342E /* InfoViewController.swift in Sources */,
+				8EBC19901F88E02400115439 /* ParkingManager.swift in Sources */,
 				8E2D42B71EB274BF00F286CF /* AnnotationView.swift in Sources */,
 				8EA9E0FD1EB5FD4E007D1BA7 /* ModelExtensions.swift in Sources */,
 				8E39213F1EB1C44200277701 /* Database.swift in Sources */,
@@ -659,10 +663,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Pargi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-D ENABLE_SEARCH";
-				"OTHER_SWIFT_FLAGS[sdk=iphonesimulator*]" = "-D IOS_SIMULATOR -D ENABLE_SEARCH";
+				"OTHER_SWIFT_FLAGS[sdk=iphoneos*]" = "-D ENABLE_SEARCH";
+				"OTHER_SWIFT_FLAGS[sdk=iphonesimulator*]" = "-D IOS_SIMULATOR -D ENABLE_SEARCH -D FAKE_PARKING";
 				PRODUCT_BUNDLE_IDENTIFIER = debug.hnormak.pargi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a0c5453c-de64-4d1a-a94d-30ffc9702b16";
@@ -684,7 +688,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Pargi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hnormak.pargi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
