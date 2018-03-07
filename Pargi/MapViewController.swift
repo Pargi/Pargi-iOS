@@ -130,7 +130,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             return self.mapView.frame
         }
         
-        return CGRect(origin: mapViewRect.origin, size: CGSize(width: mapViewRect.width, height: drawerRect.minY - mapViewRect.minY))
+        let offset: CGFloat
+        if #available(iOS 11.0, *) {
+            offset = self.view.safeAreaInsets.bottom
+        } else {
+            offset = self.bottomLayoutGuide.length
+        }
+        
+        return CGRect(origin: mapViewRect.origin, size: CGSize(width: mapViewRect.width, height: drawerRect.minY - mapViewRect.minY + offset))
     }
     
     fileprivate func visualCenterCoordinate(forCoordinate coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
@@ -155,7 +162,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     
     func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
         // Update our "visible area" on the map
-        let delta = (distance + bottomSafeArea - self.previousBottomDistance) / 2
+        let delta = (distance - bottomSafeArea - self.previousBottomDistance) / 2
         
         // Determine the center point of the new visible area
         let newCenter = CGPoint(x: self.mapView.frame.midX, y: self.mapView.frame.midY + delta)
@@ -165,7 +172,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: existingCamera.altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
         self.mapView.setCamera(camera, animated: false)
         
-        self.previousBottomDistance = distance + bottomSafeArea
+        self.previousBottomDistance = distance
         
         // Update user location centering button coordinates based on drawer height
         locateUserButtonBottomConstraint.constant = -distance
