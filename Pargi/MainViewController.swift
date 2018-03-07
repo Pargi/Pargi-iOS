@@ -152,7 +152,6 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
                 detailView.zones = zones
             }
         } else if let parkedView = self.parkedViewController {
-            // TODO: Hook up delegate and pass along data
             parkedView.delegate = self
             parkedView.licensePlateNumber = UserData.shared.licensePlateNumber
             parkedView.zone = UserData.shared.currentParkedZone
