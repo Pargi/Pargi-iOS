@@ -21,6 +21,7 @@ struct UserData {
     // User info key for the UpdatedNotification containing the previous UserData value
     static let OldUserDataKey = "OldUserDataKey"
 
+    var deviceIdentifier: String
     var licensePlateNumber: String?
     var otherLicensePlateNumbers: [String]
     
@@ -58,7 +59,10 @@ struct UserData {
                 return nil
             }()
             
-            return UserData(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone, currentParkedCoordinate: nil)
+            // Generate a new UUID for the device (just a random UUID)
+            let identifier = UUID().uuidString
+            
+            return UserData(deviceIdentifier: identifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone, currentParkedCoordinate: nil)
         }
     }() {
         didSet {
@@ -97,6 +101,7 @@ struct UserData {
 
 extension UserData: CerealType {
     private enum Keys {
+        static let deviceIdentifier = "deviceIdentifier"
         static let licensePlateNumber = "licensePlateNumber"
         static let otherLicensePlateNumbers = "otherLicensePlateNumbers"
         static let isParked = "isParked"
@@ -106,6 +111,7 @@ extension UserData: CerealType {
     }
     
     init(decoder: Cereal.CerealDecoder) throws {
+        let deviceIdentifier: String = try decoder.decode(key: Keys.deviceIdentifier) ?? UUID().uuidString
         let license: String? = try decoder.decode(key: Keys.licensePlateNumber)
         let otherLicenses: [String] = try decoder.decode(key: Keys.otherLicensePlateNumbers) ?? []
         let isParked: Bool = try decoder.decode(key: Keys.isParked)!
@@ -113,10 +119,11 @@ extension UserData: CerealType {
         let currentParkedZone: Zone? = try decoder.decodeCereal(key: Keys.currentParkedZone)
         let currentParkedCoordinate: CLLocationCoordinate2D? = try decoder.decodeCereal(key: Keys.currentParkedCoordinate)
         
-        self.init(licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone, currentParkedCoordinate: currentParkedCoordinate)
+        self.init(deviceIdentifier: deviceIdentifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone, currentParkedCoordinate: currentParkedCoordinate)
     }
     
     func encodeWithCereal(_ encoder: inout Cereal.CerealEncoder) throws {
+        try encoder.encode(self.deviceIdentifier, forKey: Keys.deviceIdentifier)
         try encoder.encode(self.licensePlateNumber, forKey: Keys.licensePlateNumber)
         try encoder.encode(self.otherLicensePlateNumbers, forKey: Keys.otherLicensePlateNumbers)
         try encoder.encode(self.isParked, forKey: Keys.isParked)

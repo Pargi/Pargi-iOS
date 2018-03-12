@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0D69E62054564400AB7E4F /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0D69E42054564400AB7E4F /* Networking.framework */; };
+		8E0D69E82054572100AB7E4F /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0D69E72054572100AB7E4F /* AnalyticsManager.swift */; };
 		8E2909201EB2340C00CBE4F7 /* Pulley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E29091F1EB2340C00CBE4F7 /* Pulley.framework */; };
 		8E2D42AD1EB23CEF00F286CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D42AC1EB23CEF00F286CF /* DetailViewController.swift */; };
 		8E2D42AF1EB24F7200F286CF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D42AE1EB24F7200F286CF /* MainViewController.swift */; };
@@ -79,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0D69E42054564400AB7E4F /* Networking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Networking.framework; path = Carthage/Build/iOS/Networking.framework; sourceTree = "<group>"; };
+		8E0D69E72054572100AB7E4F /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		8E29091F1EB2340C00CBE4F7 /* Pulley.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulley.framework; path = Carthage/Build/iOS/Pulley.framework; sourceTree = "<group>"; };
 		8E2D42AC1EB23CEF00F286CF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8E2D42AE1EB24F7200F286CF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			files = (
 				8E39213C1EB1C24500277701 /* Cereal.framework in Frameworks */,
 				8E2909201EB2340C00CBE4F7 /* Pulley.framework in Frameworks */,
+				8E0D69E62054564400AB7E4F /* Networking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +177,7 @@
 		8E39213A1EB1C24500277701 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E0D69E42054564400AB7E4F /* Networking.framework */,
 				8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */,
 				8E29091F1EB2340C00CBE4F7 /* Pulley.framework */,
 				8E39213B1EB1C24500277701 /* Cereal.framework */,
@@ -267,6 +273,7 @@
 				8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */,
 				8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */,
 				8EBC198F1F88E02400115439 /* ParkingManager.swift */,
+				8E0D69E72054572100AB7E4F /* AnalyticsManager.swift */,
 				8ED7E8221EB1BCED00F13023 /* Main.storyboard */,
 				8EA9E0F81EB4C3F6007D1BA7 /* Localizable.strings */,
 				8ED7E8251EB1BCED00F13023 /* Assets.xcassets */,
@@ -418,6 +425,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Cereal.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Pulley.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Networking.framework",
 			);
 			outputPaths = (
 			);
@@ -462,6 +470,7 @@
 				8E3921661EB2071C00277701 /* JSONParsing.swift in Sources */,
 				8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */,
 				8E2D42B41EB269D400F286CF /* UIKitExtensions.swift in Sources */,
+				8E0D69E82054572100AB7E4F /* AnalyticsManager.swift in Sources */,
 				8E2D42AD1EB23CEF00F286CF /* DetailViewController.swift in Sources */,
 				8EED90161EE18F3900240A20 /* SearchViewController.swift in Sources */,
 				8EA9E0FB1EB4C43D007D1BA7 /* FoundationExtensions.swift in Sources */,
@@ -671,7 +680,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a0c5453c-de64-4d1a-a94d-30ffc9702b16";
 				PROVISIONING_PROFILE_SPECIFIER = Wildcard;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -694,7 +702,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5dbb14a7-1e4d-4c2e-b3de-823a8932de18";
 				PROVISIONING_PROFILE_SPECIFIER = "Pargi App Store";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

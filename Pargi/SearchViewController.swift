@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     // MARK: UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.isSearching = searchText.characters.count > 0
+        self.isSearching = !searchText.isEmpty
         
         self.matchingZones = self.zones.filter { (zone) in
             return zone.code.lowercased().contains(searchText.lowercased())

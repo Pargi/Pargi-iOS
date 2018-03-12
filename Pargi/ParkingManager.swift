@@ -25,6 +25,18 @@ class ParkingManager: NSObject {
     fileprivate var startBlock: ((MessageComposeResult) -> Void)?
     fileprivate var endBlock: ((Bool) -> Void)?
     
+    private func endParkingState() {
+        // If possible, track the parking event
+        if let zone = UserData.shared.currentParkedZone,
+            let start = UserData.shared.parkedAt,
+            let coordinate = UserData.shared.currentParkedCoordinate {
+            AnalyticsManager.shared.trackParkingEvent(zone: zone, start: start, end: Date(), coordinate: coordinate, deviceIdentifier: UserData.shared.deviceIdentifier)
+        }
+        
+        // Mark the parking as done in the data
+        UserData.shared.endParking()
+    }
+    
     func startParking(licensePlate: String, zone: Zone, coordinate: CLLocationCoordinate2D? = nil, using viewController: UIViewController, completion: ((MessageComposeResult) -> Void)? = nil) {
         // If already parked, no point to try again
         guard !UserData.shared.isParked else {
@@ -68,7 +80,7 @@ class ParkingManager: NSObject {
         }
         
         #if FAKE_PARKING
-            UserData.shared.endParking()
+            self.endParkingState()
             DispatchQueue.main.async {
                 completion?(true)
             }
@@ -94,8 +106,7 @@ extension ParkingManager: CXCallObserverDelegate {
             return
         }
         
-        // Assume this call was the one we wanted to trigger and end parking
-        UserData.shared.endParking()
+        self.endParkingState()
         
         // Cleanup
         self.callObserver?.setDelegate(nil, queue: nil)
