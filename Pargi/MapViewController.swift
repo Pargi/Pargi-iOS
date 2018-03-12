@@ -182,6 +182,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         // Update our visible zones
         self.updateVisibleZones()
         
+        // Update the locate button constraint
+        if let drawerVC = drawer.drawerContentViewController, let primaryVC = drawer.primaryContentViewController {
+            let drawerFrame = drawer.view.convert(drawerVC.view.bounds, from: drawerVC.view)
+            let primaryFrame = drawer.view.convert(primaryVC.view.bounds, from: primaryVC.view)
+            
+            locateUserButtonBottomConstraint.constant = min(drawerFrame.minY - primaryFrame.maxY, 0)
+        }
+        
         // Calling this after drawer has changed, as it will break drawer opening if called in ’drawerChangedDistanceFromBottom’
         self.view.setNeedsUpdateConstraints()
     }
