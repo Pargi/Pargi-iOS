@@ -23,15 +23,29 @@ class AnalyticsManager {
         self.formatter = ISO8601DateFormatter()
         self.formatter.formatOptions = [.withInternetDateTime]
 
+        guard let info = Bundle.main.infoDictionary else {
+            self.networking = nil
+            return
+        }
+        
         // If environment is not correctly set up, we'll not have networking capabilities
         // however, the manager itself should still operate
-        guard let baseURL = ProcessInfo.processInfo.environment["API_BASE_URL"], let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
+        guard
+            let baseURL = info["API_BASE_URL"] as? String,
+            let apiKey = info["API_KEY"] as? String
+        else {
+            self.networking = nil
+            return
+        }
+        
+        // Make sure the API values are actually defined
+        guard !baseURL.isEmpty, !apiKey.isEmpty else {
             self.networking = nil
             return
         }
         
         // Read app version
-        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+        guard let version = info["CFBundleShortVersionString"] as? String else {
             self.networking = nil
             return
         }
