@@ -16,6 +16,7 @@ import MapKit
 
 class MainViewController: PulleyViewController, MapViewControllerDelegate, DetailViewControllerDelegate, ParkedViewControllerDelegate {
     private var selectedZone: Zone? = nil
+    private var visibleZones: [Zone]? = nil
     
     enum ParkedState {
         case driving
@@ -216,6 +217,8 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             self.selectedZone = bestMatches.first
         }
         
+        self.visibleZones = bestMatches
+        
         if let detailView = self.drawerContentViewController as? DetailViewController {
             detailView.zones = bestMatches
             detailView.selectedZone = self.selectedZone
@@ -254,7 +257,11 @@ class MainViewController: PulleyViewController, MapViewControllerDelegate, Detai
             return
         }
         
-        ParkingManager.shared.startParking(licensePlate: licensePlate, zone: zone, coordinate: self.mapViewController?.currentUserLocation?.coordinate, using: self) { (result) in
+        guard let alternatives = self.visibleZones else {
+            return
+        }
+                
+        ParkingManager.shared.startParking(licensePlate: licensePlate, zone: zone, unsuitableAlternatives: alternatives.filter { $0 != zone }, coordinate: self.mapViewController?.currentUserLocation?.coordinate, using: self) { (result) in
             if result == .failed {
                 // Failed, we should show an error
                 // Show an alert, we can't send SMS

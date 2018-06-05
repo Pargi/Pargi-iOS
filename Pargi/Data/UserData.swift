@@ -28,6 +28,7 @@ struct UserData {
     var isParked: Bool = false
     var parkedAt: Date? = nil
     var currentParkedZone: Zone? = nil
+    var currentUnsuitableAlternativeZones: [Zone]? = nil
     var currentParkedCoordinate: CLLocationCoordinate2D? = nil
     
     private static let userDataURL: URL = {
@@ -62,7 +63,7 @@ struct UserData {
             // Generate a new UUID for the device (just a random UUID)
             let identifier = UUID().uuidString
             
-            return UserData(deviceIdentifier: identifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone, currentParkedCoordinate: nil)
+            return UserData(deviceIdentifier: identifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: parkedZone, currentUnsuitableAlternativeZones: nil, currentParkedCoordinate: nil)
         }
     }() {
         didSet {
@@ -80,9 +81,10 @@ struct UserData {
     
     // Convenience
     
-    mutating func startParking(withZone zone: Zone, andCoordinate coordinate: CLLocationCoordinate2D? = nil) {
+    mutating func startParking(withZone zone: Zone, unsuitableAlternatives: [Zone]? = nil, andCoordinate coordinate: CLLocationCoordinate2D? = nil) {
         self.isParked = true
         self.currentParkedZone = zone
+        self.currentUnsuitableAlternativeZones = unsuitableAlternatives
         self.currentParkedCoordinate = coordinate
         self.parkedAt = Date()
     }
@@ -90,6 +92,7 @@ struct UserData {
     mutating func endParking() {
         self.isParked = false
         self.currentParkedZone = nil
+        self.currentUnsuitableAlternativeZones = nil
         self.currentParkedCoordinate = nil
         self.parkedAt = nil
     }
@@ -108,6 +111,7 @@ extension UserData: CerealType {
         static let parkedAt = "parkedAt"
         static let currentParkedZone = "currentParkedZone"
         static let currentParkedCoordinate = "currentParkedCoordinate"
+        static let currentUnsuitableAlternativeZones = "currentUnsuitableAlternativeZones"
     }
     
     init(decoder: Cereal.CerealDecoder) throws {
@@ -118,8 +122,9 @@ extension UserData: CerealType {
         let parkedAt: Date? = try decoder.decode(key: Keys.parkedAt)
         let currentParkedZone: Zone? = try decoder.decodeCereal(key: Keys.currentParkedZone)
         let currentParkedCoordinate: CLLocationCoordinate2D? = try decoder.decodeCereal(key: Keys.currentParkedCoordinate)
-        
-        self.init(deviceIdentifier: deviceIdentifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone, currentParkedCoordinate: currentParkedCoordinate)
+        let currentUnsuitableAlternativeZones: [Zone]? = try decoder.decodeCereal(key: Keys.currentUnsuitableAlternativeZones)
+
+        self.init(deviceIdentifier: deviceIdentifier, licensePlateNumber: license, otherLicensePlateNumbers: otherLicenses, isParked: isParked, parkedAt: parkedAt, currentParkedZone: currentParkedZone, currentUnsuitableAlternativeZones: currentUnsuitableAlternativeZones, currentParkedCoordinate: currentParkedCoordinate)
     }
     
     func encodeWithCereal(_ encoder: inout Cereal.CerealEncoder) throws {
@@ -130,6 +135,7 @@ extension UserData: CerealType {
         try encoder.encode(self.parkedAt, forKey: Keys.parkedAt)
         try encoder.encode(self.currentParkedZone, forKey: Keys.currentParkedZone)
         try encoder.encode(self.currentParkedCoordinate, forKey: Keys.currentParkedCoordinate)
+        try encoder.encode(self.currentUnsuitableAlternativeZones, forKey: Keys.currentUnsuitableAlternativeZones)
     }
 }
 

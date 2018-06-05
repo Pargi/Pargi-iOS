@@ -18,6 +18,7 @@ class ParkingManager: NSObject {
     static let shared = ParkingManager()
     
     fileprivate var zone: Zone?
+    fileprivate var unsuitableZones: [Zone]?
     fileprivate var coordinate: CLLocationCoordinate2D?
     fileprivate var callObserver: CXCallObserver?
     fileprivate let callQueue = OperationQueue()
@@ -30,14 +31,14 @@ class ParkingManager: NSObject {
         if let zone = UserData.shared.currentParkedZone,
             let start = UserData.shared.parkedAt,
             let coordinate = UserData.shared.currentParkedCoordinate {
-            AnalyticsManager.shared.trackParkingEvent(zone: zone, start: start, end: Date(), coordinate: coordinate, deviceIdentifier: UserData.shared.deviceIdentifier)
+            AnalyticsManager.shared.trackParkingEvent(zone: zone, alternativeZones: UserData.shared.currentUnsuitableAlternativeZones, start: start, end: Date(), coordinate: coordinate, deviceIdentifier: UserData.shared.deviceIdentifier)
         }
         
         // Mark the parking as done in the data
         UserData.shared.endParking()
     }
     
-    func startParking(licensePlate: String, zone: Zone, coordinate: CLLocationCoordinate2D? = nil, using viewController: UIViewController, completion: ((MessageComposeResult) -> Void)? = nil) {
+    func startParking(licensePlate: String, zone: Zone, unsuitableAlternatives: [Zone]? = nil, coordinate: CLLocationCoordinate2D? = nil, using viewController: UIViewController, completion: ((MessageComposeResult) -> Void)? = nil) {
         // If already parked, no point to try again
         guard !UserData.shared.isParked else {
             completion?(.failed)
@@ -45,7 +46,7 @@ class ParkingManager: NSObject {
         }
         
         #if FAKE_PARKING
-            UserData.shared.startParking(withZone: zone, andCoordinate: coordinate)
+            UserData.shared.startParking(withZone: zone, unsuitableAlternatives: unsuitableAlternatives, andCoordinate: coordinate)
             completion?(.sent)
             return
         #else
@@ -62,6 +63,7 @@ class ParkingManager: NSObject {
             }
             
             self.zone = zone
+            self.unsuitableZones = unsuitableAlternatives
             self.coordinate = coordinate
             self.startBlock = completion
             let composeController = MFMessageComposeViewController(licensePlate: licensePlate, zone: zone)
@@ -126,7 +128,7 @@ extension ParkingManager: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true) {
             if let zone = self.zone, result == .sent {
-                UserData.shared.startParking(withZone: zone, andCoordinate: self.coordinate)
+                UserData.shared.startParking(withZone: zone, unsuitableAlternatives: self.unsuitableZones, andCoordinate: self.coordinate)
             }
             
             if let completion = self.startBlock {

@@ -60,20 +60,24 @@ class AnalyticsManager {
     
     // MARK: API
     
-    func trackParkingEvent(zone: Zone, start: Date, end: Date, coordinate: CLLocationCoordinate2D, deviceIdentifier: String) {
+    func trackParkingEvent(zone: Zone, alternativeZones: [Zone]? = nil, start: Date, end: Date, coordinate: CLLocationCoordinate2D, deviceIdentifier: String) {
         guard let networking = self.networking else {
             // Simply ignore network requests
             return
         }
         
-        let parameters: [String: Any] = [
+        var parameters: [String: Any] = [
             "zone": zone.code,
             "device": deviceIdentifier.lowercased(),
             "start": self.formatter.string(from: start),
             "end": self.formatter.string(from: end),
             "latitude": coordinate.latitude,
-            "longitude": coordinate.longitude
+            "longitude": coordinate.longitude,
         ]
+        
+        if let alternatives = alternativeZones {
+            parameters["alternativeZones"] = alternatives.map { $0.code }
+        }
         
         // We don't really care about the result, as the app does nothing with the information
         networking.post("/events", parameters: parameters) { _ in }
