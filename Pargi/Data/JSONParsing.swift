@@ -47,10 +47,10 @@ extension Database {
         let allZones = Array(Array(keyedZones.values).joined())
         
         // Parse individual pieces of data
-        self.providers = providers.flatMap({ Provider(dictionary: $0, zones: keyedZones) })
+        self.providers = providers.compactMap({ Provider(dictionary: $0, zones: keyedZones) })
 
         if let groups = data["groups"] as? [[String: Any]] {
-            self.groups = groups.flatMap({ ZoneGroup(dictionary: $0, zones: allZones) })
+            self.groups = groups.compactMap({ ZoneGroup(dictionary: $0, zones: allZones) })
         } else {
             self.groups = []
         }
@@ -88,16 +88,16 @@ fileprivate extension Zone {
         
         // Regions
         if let regions = dictionary["regions"] as? [[String: Any]] {
-            self.regions = regions.flatMap(Zone.Region.init)
+            self.regions = regions.compactMap(Zone.Region.init)
         } else if let region = dictionary["regions"] as? [String: Any] {
-            self.regions = [Zone.Region.init(dictionary: region)].flatMap({ $0 })
+            self.regions = [Zone.Region.init(dictionary: region)].compactMap({ $0 })
         } else {
             return nil
         }
         
         // Tariff
         if let tariffs = dictionary["tariffs"] as? [[String: Any]] {
-            self.tariffs = tariffs.flatMap(Zone.Tariff.init)
+            self.tariffs = tariffs.compactMap(Zone.Tariff.init)
         } else {
             self.tariffs = []
         }
@@ -112,7 +112,7 @@ fileprivate extension Zone.Tariff {
             return nil
         }
         
-        let daySum = days.flatMap({ 1 << ($0 - 1) }).reduce(0, { return $0 + $1 })
+        let daySum = days.compactMap({ 1 << ($0 - 1) }).reduce(0, { return $0 + $1 })
         self.days = Zone.Tariff.Day(rawValue: daySum)
         self.periods = periods.map(transform: { (Int($0)!, $1) })
         
@@ -131,14 +131,14 @@ fileprivate extension Zone.Region {
         }
         
         // Validate all points (no shenanigans with less than 2 numbers or anything)
-        guard points.flatMap({ $0.count != 2 ? $0 : nil }).count == 0 else {
+        guard points.compactMap({ $0.count != 2 ? $0 : nil }).count == 0 else {
             return nil
         }
         
         self.points = points.map({ Zone.Region.Location(latitude: $0[0], longitude: $0[1]) })
         
         if let interiorRegions = dictionary["interiorRegions"] as? [[String: Any]] {
-            self.interiorRegions = interiorRegions.flatMap(Zone.Region.init)
+            self.interiorRegions = interiorRegions.compactMap(Zone.Region.init)
         } else {
             self.interiorRegions = []
         }

@@ -101,7 +101,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             return MKMapRectIntersectsRect(overlay.boundingMapRect, paddedMapRect)
         })
         
-        let zones = annotations.flatMap({ ($0 as? Annotation)?.zone }) + overlays.flatMap({ ($0 as? Annotation)?.zone })
+        let zones = annotations.compactMap({ ($0 as? Annotation)?.zone }) + overlays.compactMap({ ($0 as? Annotation)?.zone })
         let uniqueZones = zones.reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
         
         // Sort the zones based on distance from the center (unless we are inside of them, in which case the distance is equivalent to 0)

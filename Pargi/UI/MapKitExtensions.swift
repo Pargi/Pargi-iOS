@@ -149,7 +149,7 @@ fileprivate extension Zone.Region {
             }
             
             let coordinates = self.points.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
-            let interiorPolygons = self.interiorRegions.flatMap({ return $0.polygon })
+            let interiorPolygons = self.interiorRegions.compactMap({ return $0.polygon })
             
             return MKPolygon(coordinates: coordinates, count: coordinates.count, interiorPolygons: interiorPolygons)
         }
