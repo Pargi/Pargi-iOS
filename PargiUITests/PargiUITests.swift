@@ -43,27 +43,12 @@ class PargiUITests: XCTestCase {
     }
     
     func openDetailView(inApp app: XCUIApplication) {
-        let predicate = NSPredicate(format: "label BEGINSWITH 'Pargi'")
-        let parkBtn = app.buttons.matching(predicate).firstMatch
-        let driveBtn = app.buttons["Sõida"].firstMatch
-        
-        if parkBtn.exists {
-            parkBtn.swipeUp()
-        } else if driveBtn.exists {
-            driveBtn.swipeUp()
-        }
+        app.scrollViews.children(matching: .other).element(boundBy: 2).children(matching: .other).element.press(forDuration: 1, thenDragTo: app.statusBars.firstMatch)
+
     }
     
     func closeDetailView(inApp app: XCUIApplication) {
-        let predicate = NSPredicate(format: "label BEGINSWITH 'Pargi'")
-        let parkBtn = app.buttons.matching(predicate).firstMatch
-        let driveBtn = app.buttons["Sõida"].firstMatch
-        
-        if parkBtn.exists {
-            parkBtn.swipeDown()
-        } else if driveBtn.exists {
-            driveBtn.swipeDown()
-        }
+        XCUIApplication().scrollViews.children(matching: .other).element(boundBy: 2).children(matching: .other).element.swipeDown()
     }
     
     func endParking(inApp app: XCUIApplication) {
@@ -75,6 +60,7 @@ class PargiUITests: XCTestCase {
     }
     
     func setLicensePlate(toValue licensePlate: String, inApp app: XCUIApplication) {
+        _ = app.scrollViews.otherElements.buttons["Edit"].waitForExistence(timeout: 4)
         app.scrollViews.otherElements.buttons["Edit"].tap()
         app.textFields.firstMatch.doubleTap()
         
@@ -102,6 +88,7 @@ class PargiUITests: XCTestCase {
 
         self.openDetailView(inApp: app)
         self.setLicensePlate(toValue: "123ABC", inApp: app)
+
         assert(app.scrollViews.otherElements.staticTexts["123ABC"].exists)
     }
     
