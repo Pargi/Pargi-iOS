@@ -22,7 +22,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     var trackUserLocation: Bool = true
     var currentUserLocation: CLLocation? {
         get {
-            return self.mapView.userLocation.location
+            guard let location = self.mapView.userLocation.location else {
+                return nil
+            }
+            
+            guard CLLocationCoordinate2DIsValid(location.coordinate) else {
+                return nil
+            }
+            
+            return location
         }
     }
     
@@ -72,24 +80,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
     }
     
     @IBAction func locateUser(_ sender: UIButton) {
+        self.moveCameraToUserLocation(animated: true) { _ in sender.isHidden = true }
+    }
+    
+    // MARK: Helpers
+    
+    fileprivate func moveCameraToUserLocation(animated: Bool, completion: ((_ success: Bool) -> Void)? = nil) {
         guard let currentUserLocation = self.currentUserLocation else {
             return
         }
         
         let camera = self.mapView.camera
-        let center = self.visualCenterCoordinate(forCoordinate: currentUserLocation.coordinate)
-        let newCamera = MKMapCamera(lookingAtCenter: center, fromDistance: camera.altitude, pitch: camera.pitch, heading: 0)
-
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+        let altitude = min(camera.altitude, self.mapMaxAltitude)
+        let center = self.visualCenterCoordinate(forCoordinate: currentUserLocation.coordinate, andAltitude: altitude)
+        let newCamera = MKMapCamera(lookingAtCenter: center, fromDistance: altitude, pitch: camera.pitch, heading: 0)
+        
+        UIView.animate(withDuration: animated ? 0.2 : 0, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
             self.mapView.camera = newCamera
         }) { success in
             self.updateVisibleZones()
             self.trackUserLocation = true
-            sender.isHidden = true
+            completion?(success)
         }
     }
-    
-    // MARK: Helpers
     
     fileprivate func updateVisibleZones() {
         // Figure out which zones are now visible
@@ -140,16 +153,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         return CGRect(origin: mapViewRect.origin, size: CGSize(width: mapViewRect.width, height: drawerRect.minY - mapViewRect.minY + offset))
     }
     
-    fileprivate func visualCenterCoordinate(forCoordinate coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
-        // Determine visual offset of the center coordinate
+    fileprivate func visualCenterCoordinate(
+        forCoordinate coordinate: CLLocationCoordinate2D,
+        andAltitude altitude: CLLocationDistance
+    ) -> CLLocationCoordinate2D {
+        // Determine offset in points
         let mapFrame = self.mapView.frame
         let uncoveredFrame = self.uncoveredMapFrame()
         let offset = mapFrame.midY - uncoveredFrame.midY
+
+        // Determine the offset in meters (for current camera altitude)
+        let currentCenter = self.mapView.centerCoordinate
+        let currentCenterPoint = self.mapView.convert(currentCenter, toPointTo: self.mapView.superview)
+        let adjustedCenter = self.mapView.convert(CGPoint(x: currentCenterPoint.x, y: currentCenterPoint.y - offset), toCoordinateFrom: self.mapView.superview)
         
-        // Correct the coordinate for visual offset (caused by the drawer)
-        var point = self.mapView.convert(coordinate, toPointTo: self.view)
-        point.y += offset
-        return self.mapView.convert(point, toCoordinateFrom: self.view)
+        let distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(currentCenter), MKMapPointForCoordinate(adjustedCenter))
+        let altitudeRatio = distance / self.mapView.camera.altitude
+        
+        // Use the distance/ratio to determine the adjusted center at given coordinate and altitude
+        let mapPoint = MKMapPointForCoordinate(coordinate)
+        var result = mapPoint
+        result.y += MKMapPointsPerMeterAtLatitude(coordinate.latitude) * altitudeRatio * altitude
+        
+        return MKCoordinateForMapPoint(result)
     }
     
     // MARK: UIGestureRecognizerDelegate
@@ -202,18 +228,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
             return
         }
         
-        // Update camera (if altitude is higher than expected)
-        let existingCamera = mapView.camera
-        let altitude = min(existingCamera.altitude, self.mapMaxAltitude)
-        let coordinate = self.visualCenterCoordinate(forCoordinate: userLocation.coordinate)
-        
-        // Change the camera
-        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: altitude, pitch: existingCamera.pitch, heading: existingCamera.heading)
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
-            self.mapView.camera = camera
-        }) { success in
-            self.updateVisibleZones()
-        }
+        self.moveCameraToUserLocation(animated: true)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
