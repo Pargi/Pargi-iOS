@@ -33,6 +33,9 @@
 		8E3921681EB227CF00277701 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3921671EB227CF00277701 /* Networking.swift */; };
 		8E5189201F47559400DBA892 /* MessageUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */; };
 		8E585A391EBDC2AD0006342E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E585A381EBDC2AD0006342E /* InfoViewController.swift */; };
+		8E65598820D8D1DF00317BFB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65598420D8D1DF00317BFB /* Info.plist */; };
+		8E65599720D8D3F600317BFB /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65598220D8D1DF00317BFB /* SnapshotHelper.swift */; };
+		8E65599820D8D3F600317BFB /* PargiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65598320D8D1DF00317BFB /* PargiUITests.swift */; };
 		8E8432201EE0849200A1F892 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84321F1EE0849200A1F892 /* UserData.swift */; };
 		8E8746881F80E4B600A0B0CB /* ParkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */; };
 		8E8904DD1EBF5D8C0049EF7A /* CarLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8904DC1EBF5D8C0049EF7A /* CarLicenseViewController.swift */; };
@@ -51,6 +54,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		8E39214F1EB1E6FA00277701 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8ED7E8131EB1BCED00F13023 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8ED7E81A1EB1BCED00F13023;
+			remoteInfo = Pargi;
+		};
+		8E65599220D8D1EA00317BFB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8ED7E8131EB1BCED00F13023 /* Project object */;
 			proxyType = 1;
@@ -107,6 +117,10 @@
 		8E4A563A2057ACE900505C25 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		8E51891F1F47559400DBA892 /* MessageUIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageUIExtensions.swift; sourceTree = "<group>"; };
 		8E585A381EBDC2AD0006342E /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		8E65598220D8D1DF00317BFB /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		8E65598320D8D1DF00317BFB /* PargiUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PargiUITests.swift; sourceTree = "<group>"; };
+		8E65598420D8D1DF00317BFB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E65598D20D8D1EA00317BFB /* PargiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PargiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E6DC8D31EB2382500E8C1CA /* Pulley.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pulley.xcodeproj; path = Carthage/Checkouts/Pulley/Pulley.xcodeproj; sourceTree = "<group>"; };
 		8E84321F1EE0849200A1F892 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8E8746871F80E4B600A0B0CB /* ParkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkedViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +148,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E3921541EB1E70D00277701 /* Cereal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E65598A20D8D1EA00317BFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +245,16 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		8E65598120D8D1DF00317BFB /* PargiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8E65598220D8D1DF00317BFB /* SnapshotHelper.swift */,
+				8E65598320D8D1DF00317BFB /* PargiUITests.swift */,
+				8E65598420D8D1DF00317BFB /* Info.plist */,
+			);
+			path = PargiUITests;
+			sourceTree = "<group>";
+		};
 		8E6DC8D41EB2382500E8C1CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +277,7 @@
 			children = (
 				8ED7E81D1EB1BCED00F13023 /* Pargi */,
 				8E39214B1EB1E6FA00277701 /* PargiTests */,
+				8E65598120D8D1DF00317BFB /* PargiUITests */,
 				8ED7E81C1EB1BCED00F13023 /* Products */,
 				8E3921591EB2033800277701 /* Data */,
 				8E3921381EB1C13400277701 /* Cartfile */,
@@ -258,6 +290,7 @@
 			children = (
 				8ED7E81B1EB1BCED00F13023 /* Pargi.app */,
 				8E39214A1EB1E6FA00277701 /* PargiTests.xctest */,
+				8E65598D20D8D1EA00317BFB /* PargiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -310,6 +343,24 @@
 			productReference = 8E39214A1EB1E6FA00277701 /* PargiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8E65598C20D8D1EA00317BFB /* PargiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E65599420D8D1EA00317BFB /* Build configuration list for PBXNativeTarget "PargiUITests" */;
+			buildPhases = (
+				8E65598920D8D1EA00317BFB /* Sources */,
+				8E65598A20D8D1EA00317BFB /* Frameworks */,
+				8E65598B20D8D1EA00317BFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E65599320D8D1EA00317BFB /* PBXTargetDependency */,
+			);
+			name = PargiUITests;
+			productName = PargiUITests;
+			productReference = 8E65598D20D8D1EA00317BFB /* PargiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		8ED7E81A1EB1BCED00F13023 /* Pargi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8ED7E82D1EB1BCED00F13023 /* Build configuration list for PBXNativeTarget "Pargi" */;
@@ -335,7 +386,7 @@
 		8ED7E8131EB1BCED00F13023 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Henri Normak";
 				TargetAttributes = {
@@ -343,6 +394,12 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = M95U3P5YY5;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8ED7E81A1EB1BCED00F13023;
+					};
+					8E65598C20D8D1EA00317BFB = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = M95U3P5YY5;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8ED7E81A1EB1BCED00F13023;
 					};
@@ -375,6 +432,7 @@
 			targets = (
 				8ED7E81A1EB1BCED00F13023 /* Pargi */,
 				8E3921491EB1E6FA00277701 /* PargiTests */,
+				8E65598C20D8D1EA00317BFB /* PargiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -404,12 +462,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E65598B20D8D1EA00317BFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8ED7E8191EB1BCED00F13023 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8EA9E0F91EB4C3F6007D1BA7 /* Localizable.strings in Resources */,
 				8E39215E1EB2033800277701 /* Data.json in Resources */,
+				8E65598820D8D1DF00317BFB /* Info.plist in Resources */,
 				8ED7E8291EB1BCED00F13023 /* LaunchScreen.storyboard in Resources */,
 				8ED7E8261EB1BCED00F13023 /* Assets.xcassets in Resources */,
 				8ED7E8241EB1BCED00F13023 /* Main.storyboard in Resources */,
@@ -448,6 +514,15 @@
 				8E3921561EB1E7D200277701 /* Provider.swift in Sources */,
 				8E3921581EB1E7D700277701 /* ZoneGroup.swift in Sources */,
 				8E39214D1EB1E6FA00277701 /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E65598920D8D1EA00317BFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E65599720D8D3F600317BFB /* SnapshotHelper.swift in Sources */,
+				8E65599820D8D3F600317BFB /* PargiUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +565,11 @@
 			isa = PBXTargetDependency;
 			target = 8ED7E81A1EB1BCED00F13023 /* Pargi */;
 			targetProxy = 8E39214F1EB1E6FA00277701 /* PBXContainerItemProxy */;
+		};
+		8E65599320D8D1EA00317BFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8ED7E81A1EB1BCED00F13023 /* Pargi */;
+			targetProxy = 8E65599220D8D1EA00317BFB /* PBXContainerItemProxy */;
 		};
 		8E6DC8DD1EB2382D00E8C1CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -554,6 +634,50 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pargi.app/Pargi";
+			};
+			name = Release;
+		};
+		8E65599520D8D1EA00317BFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M95U3P5YY5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PargiUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = hnormak.PargiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5dbb14a7-1e4d-4c2e-b3de-823a8932de18";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pargi;
+			};
+			name = Debug;
+		};
+		8E65599620D8D1EA00317BFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M95U3P5YY5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PargiUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = hnormak.PargiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5dbb14a7-1e4d-4c2e-b3de-823a8932de18";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Pargi;
 			};
 			name = Release;
 		};
@@ -721,6 +845,15 @@
 			buildConfigurations = (
 				8E3921521EB1E6FA00277701 /* Debug */,
 				8E3921531EB1E6FA00277701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E65599420D8D1EA00317BFB /* Build configuration list for PBXNativeTarget "PargiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E65599520D8D1EA00317BFB /* Debug */,
+				8E65599620D8D1EA00317BFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
